@@ -1,0 +1,23 @@
+---
+driver:
+  name: vagrant
+  network:
+    - ["forwarded_port", {guest: 9631, host: 9631}]
+    - ["forwarded_port", {guest: 9632, host: 9632}]
+
+provisioner:
+  name: shell
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: centos-7.5
+
+suites:
+  - name: inspec-habitat
+    provisioner:
+      arguments: []
+    verifier:
+      inspect_tests:
+        test/integration/inspec-habitat
