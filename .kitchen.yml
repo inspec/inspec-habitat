@@ -4,6 +4,7 @@ driver:
   network:
     - ["forwarded_port", {guest: 9631, host: 9631}]
     - ["forwarded_port", {guest: 9632, host: 9632}]
+    - ["forwarded_port", {guest: 80, host: 8080}]
 
 provisioner:
   name: shell

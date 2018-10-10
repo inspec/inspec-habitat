@@ -16,4 +16,13 @@ else
   groupadd hab && true
 fi
 
-hab pkg install core/hab-sup
+hab pkg install core/hab-sup core/hab-launcher
+cp /tmp/kitchen/data/hab-sup.service /usr/lib/systemd/system/
+systemctl start hab-sup
+sleep 5
+
+hab svc load core/nginx
+hab svc start core/nginx
+sleep 5
+
+cp /tmp/kitchen/data/index.html /hab/svc/nginx/data/
