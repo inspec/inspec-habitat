@@ -1,4 +1,4 @@
-# Habitat Resource Pack for InSpec
+# InSpec Habitat Resource Pack
 
 [![Build Status](https://travis-ci.org/inspec/inspec-habitat.svg?branch=master)](https://travis-ci.org/inspec/inspec-habitat)
 
