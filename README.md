@@ -62,8 +62,10 @@ TODO: Document rake commands for this project
 
 ### Development
 
-Habitat and the Habitat Supervisor have been provided in a kitchen VM. To start
-simply run `kitchen converge`.
+Habitat CLI, the Habitat Supervisor, and a sample nginx application have been
+provided in a kitchen VM. To start these run `kitchen converge`. The sample
+application will be available on the host at port 8080.
+
 
 ### Testing
 
