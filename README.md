@@ -43,7 +43,7 @@ TODO: Show examples of use
 TODO: List individual pages of resource documentation
 
 
-## Development
+## Contributing
 
 If you'd like to contribute to this project please see [Contributing
 Rules](CONTRIBUTING.md). The following instructions will help you get your
@@ -64,9 +64,11 @@ TODO: Document rake commands for this project
 
 Habitat CLI, the Habitat Supervisor, and a sample nginx application have been
 provided in a kitchen VM. To start these run `kitchen converge`. The sample
-application will be available on the host at port 8080.
+application will be available on the host at port 8080. Habitat `http-gateway`
+and `ctl-gateway` are available on ports 9631 and 9632.
 
 
 ### Testing
 
-Tests are located in `test/integration/inspec-habitat` and may be run using `kitchen verify`.
+Tests are located in `test/integration/inspec-habitat` and may be run using
+`kitchen verify`.
