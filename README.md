@@ -35,8 +35,14 @@ depends:
 
 ## Examples
 
-TODO: Show examples of use
-
+```
+describe habitat_service(origin: 'core', name: 'httpd') do
+  it                     { should exist }
+  its('version')         { should eq '2.4.35'}
+  its('topology')        { should eq 'standalone' }
+  its('update_strategy') { should eq 'none' }
+end
+```
 
 ## Resource Documentation
 
