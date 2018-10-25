@@ -12,5 +12,5 @@ describe directory('/hab/svc/nginx/data') do
 end
 
 describe file('/hab/svc/nginx/data/index.html') do
-  its('content') { should match %r(Hello World) }
+  its('content') { should match(/Hello World/) }
 end

@@ -17,6 +17,8 @@ class HabitatService < Inspec.resource(1)
     super()
     @origin = opts[:origin]
     @name   = opts[:name]
+
+    service
   end
 
   def version
@@ -59,9 +61,10 @@ class HabitatService < Inspec.resource(1)
 
   def service
     return @services if defined?(@services)
+
     services = inspec.backend.habitat_client.services.select { |svc|
       svc['pkg']['origin'] == origin &&
-      svc['pkg']['name'] == name
+        svc['pkg']['name'] == name
     }
 
     if services.one?
@@ -69,7 +72,5 @@ class HabitatService < Inspec.resource(1)
     else
       @services = nil
     end
-    @services
-
   end
 end
