@@ -27,7 +27,7 @@ Example inspec.yml:
 name: my-profile
 title: My own Oneview profile
 version: 0.1.0
-inspec_version: '>= 2.2.7'
+inspec_version: '>= 3.0.0'
 depends:
   - name: inspec-habitat
     url: https://github.com/inspec/inspec-habitat/archive/master.tar.gz
@@ -56,16 +56,6 @@ Rules](CONTRIBUTING.md). The following instructions will help you get your
 development environment setup to run integration tests.
 
 
-### Getting Started
-
-TODO: Write getting started
-
-
-### Rake commands
-
-TODO: Document rake commands for this project
-
-
 ### Development
 
 Habitat CLI, the Habitat Supervisor, and a sample nginx application have been
@@ -73,6 +63,10 @@ provided in a kitchen VM. To start these run `kitchen converge`. The sample
 application will be available on the host at port 8080. Habitat `http-gateway`
 and `ctl-gateway` are available on ports 9631 and 9632.
 
+Running tests:
+```
+rake
+```
 
 ### Testing
 
