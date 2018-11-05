@@ -25,9 +25,9 @@ end
 namespace :test do
   desc 'Integration Tests'
   task :integration, [:controls] do |_t, args|
-    cmd = %W( bundle exec inspec exec test/integration/verify
+    cmd = %w{ bundle exec inspec exec test/integration/verify
               --reporter progress
-              -t habitat://localhost:9631 )
+              -t habitat://localhost:9631 }
 
     if args[:controls]
       sh(*cmd, '--controls', args[:controls], *args.extras)
