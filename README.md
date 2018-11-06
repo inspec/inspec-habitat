@@ -9,6 +9,15 @@ TODO: Write project summary
 
 * Ruby
 * Bundler installed
+* Train-Habitat plugin installed
+
+### Installing Train Habitat
+
+Train Habitat is not available in Ruby Gems. For now you must have a local clone of https://github.com/inspec/train-habitat.git. To install the plugin:
+
+```
+$ inspec plugin install /path/to/train-habitat
+```
 
 
 ## Use the Resources
@@ -63,8 +72,47 @@ TODO: Write getting started
 
 ### Rake commands
 
-TODO: Document rake commands for this project
+#### Ruby syntax check
 
+Runs the Ruby syntax checker against code in this repository.
+
+```
+$ rake syntax
+```
+
+
+#### Rubocop
+
+Runs Rubocop syntax checker against code in this repository.
+
+```
+$ rake rubocop
+```
+
+
+#### Lint
+
+Runs Rubocop and syntax checks against code in this repository. This is the default Rake task.
+
+```
+$ rake lint
+```
+
+
+#### Run Integration Tests
+
+Runs integration tests against a running test kitchen instance. You may optionally include a list of controls you wish to run.
+
+* You must run `kitchen converge` before running these tests.
+* You must have the train-habitat plugin installed.
+
+```
+$ kitchen converge
+
+$ rake test:integration
+
+$ rake test:integration[habitat_service]
+```
 
 ### Development
 

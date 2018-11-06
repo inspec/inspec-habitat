@@ -1,0 +1,4 @@
+name: inspec-habitat-integration-tests
+depends:
+  - name: habitat
+    path: ../../../
