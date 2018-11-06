@@ -81,18 +81,18 @@ $ rake syntax
 ```
 
 
-#### Rubucop
+#### Rubocop
 
-Runs Rubucop syntax checker against code in this repository.
+Runs Rubocop syntax checker against code in this repository.
 
 ```
-$ rake rubucop
+$ rake rubocop
 ```
 
 
 #### Lint
 
-Runs Rubucop and Syntax checks against code in this repository. This is the default rake task.
+Runs Rubocop and syntax checks against code in this repository. This is the default Rake task.
 
 ```
 $ rake lint
