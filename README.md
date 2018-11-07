@@ -25,8 +25,7 @@ $ inspec plugin install /path/to/train-habitat
 Since this is an InSpec resource pack, it only defines InSpec resources. To use
 these resources in your own controls you should create your own profile:
 
-
-#### Create a new profile
+### Create a new profile
 
 ```
 $ inspec init profile my-profile
@@ -42,6 +41,7 @@ depends:
     url: https://github.com/inspec/inspec-habitat/archive/master.tar.gz
 ```
 
+
 ## Examples
 
 ```
@@ -52,6 +52,7 @@ describe habitat_service(origin: 'core', name: 'httpd') do
   its('update_strategy') { should eq 'none' }
 end
 ```
+
 
 ## Resource Documentation
 
@@ -125,6 +126,7 @@ Running tests:
 ```
 rake
 ```
+
 
 ### Testing
 
