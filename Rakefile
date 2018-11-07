@@ -22,6 +22,18 @@ task :syntax do
   end
 end
 
+namespace :test do
+  desc 'Integration Tests'
+  task :integration, [:controls] do |_t, args|
+    cmd = %w{ bundle exec inspec exec test/integration/verify
+              --reporter progress -t habitat://localhost:9631 }
+
+    cmd += ['--controls', args[:controls], *args.extras] if args[:controls]
+
+    sh(*cmd)
+  end
+end
+
 desc 'Linting tasks'
 task lint: [:rubocop, :syntax]
 
