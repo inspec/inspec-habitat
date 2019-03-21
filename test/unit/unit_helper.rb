@@ -28,7 +28,7 @@ module InspecHabitat
       end
     end
 
-    def seek_test(opts)
+    def seek_test(_opts)
       # TODO
       describe 'when seeking the resource' do
         describe 'when the resource is locatable' do
@@ -39,7 +39,6 @@ module InspecHabitat
         end
       end
     end
-
   end
 end
 
@@ -53,8 +52,8 @@ end
 module Inspec
   module Plugins
     class Resource
-      def self.metadata
-        @metadata # Not part of the actual API
+      class << self
+        attr_reader :metadata
       end
 
       def self.name(val)
@@ -86,4 +85,3 @@ module Inspec
     Inspec::Plugins::Resource
   end
 end
-
