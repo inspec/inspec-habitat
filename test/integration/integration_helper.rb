@@ -58,23 +58,16 @@ module InspecHabitat
 
     LOCAL_TRAIN_CONNECTION = Train.create('local', command_runner: :generic).connection
 
-    def run_inspec_againt_hab(profile_path, _opts = {})
-      raw_result = nil
-      invocation = nil
-      Dir.mktmpdir do |tmp_dir|
-        write_config_creds(tmp_dir, int_test_path)
-        invocation = inspec_exec
-        invocation += ' ' + profile_path + ' '
-        invocation += ' -t habitat://int_test '
-        invocation += ' --no-create-lockfile '
-        invocation += ' --config ' + File.join(tmp_dir, 'config.json') + ' '
-        invocation += ' --reporter json '
-        raw_result = LOCAL_TRAIN_CONNECTION.run_command(invocation)
-      end
+    def run_inspec_againt_hab(profile_name, _opts = {})
+      invocation = inspec_exec
+      invocation += ' ' + File.join(int_test_path, profile_name) + ' '
+      invocation += ' -t habitat://int_test '
+      invocation += ' --no-create-lockfile '
+      invocation += ' --config ' + File.join(int_test_path, 'config.json')
+      invocation += ' --reporter json '
 
-      result = IntTestRunResult.new(raw_result)
+      result = IntTestRunResult.new(LOCAL_TRAIN_CONNECTION.run_command(invocation))
       result.payload.invocation = invocation
-      result.payload.stderr_without_deprecations = raw_result.stderr.split("\n").reject { |l| l.include?('eprecated') }.join("\n")
 
       begin
         result.payload.json = JSON.parse(result.stdout)
@@ -84,28 +77,6 @@ module InspecHabitat
       end
 
       result
-    end
-
-    def write_config_creds(tmp_dir, int_test_path)
-      config = {
-        file_version: '1.1',
-        credentials: {
-          habitat: {
-            int_test: {
-              api_url: 'http://127.0.0.1:7631', # From Vagrantfile
-              cli_ssh_user: 'vagrant',
-              cli_ssh_key_files: [
-                File.join(int_test_path, 'sup-fixture', '.vagrant', 'machines', 'default', 'virtualbox', 'private_key'),
-              ],
-              cli_ssh_host: '127.0.0.1',
-              cli_ssh_port: '7022',
-              cli_ssh_verify_host_key: 'never',
-              sudo: true,
-            },
-          },
-        },
-      }
-      File.write(File.join(tmp_dir, 'config.json'), JSON.generate(config))
     end
   end
 end
