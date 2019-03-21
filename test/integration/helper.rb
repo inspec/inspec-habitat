@@ -74,8 +74,7 @@ module InspecHabitat
 
       result = IntTestRunResult.new(raw_result)
       result.payload.invocation = invocation
-      result.payload.stderr_without_deprecations = raw_result.stderr.split("\n").reject {|l| l.include?('eprecated') }.join("\n")
-
+      result.payload.stderr_without_deprecations = raw_result.stderr.split("\n").reject { |l| l.include?('eprecated') }.join("\n")
 
       begin
         result.payload.json = JSON.parse(result.stdout)
@@ -96,15 +95,15 @@ module InspecHabitat
               api_url: 'http://127.0.0.1:7631', # From Vagrantfile
               cli_ssh_user: 'vagrant',
               cli_ssh_key_files: [
-                File.join(int_test_path,'sup-fixture', '.vagrant', 'machines', 'default', 'virtualbox', 'private_key'),
+                File.join(int_test_path, 'sup-fixture', '.vagrant', 'machines', 'default', 'virtualbox', 'private_key'),
               ],
               cli_ssh_host: '127.0.0.1',
               cli_ssh_port: '7022',
               cli_ssh_verify_host_key: 'never',
               sudo: true,
-            }
-          }
-        }
+            },
+          },
+        },
       }
       File.write(File.join(tmp_dir, 'config.json'), JSON.generate(config))
     end
