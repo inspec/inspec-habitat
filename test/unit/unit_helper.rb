@@ -32,32 +32,31 @@ module InspecHabitat
       end
     end
 
-    def seek_test(opts)
-      describe 'when seeking the resource' do
-        let(:unit_test_path) { File.expand_path(File.join('test', 'unit')) }
-        let(:unit_fixture_path) { File.join(unit_test_path, 'fixtures') }
-
-        describe 'when the resource is locatable' do
-          opts[:hit_params].each do |hit_param_set|
-            it "should be found with #{hit_param_set}" do
-              InspecHabitat::UnitTestHelper.mock_inspec_context_object(self, opts[:fixture])
-              obj = opts[:klass].new(hit_param_set) # No exception
-              obj.wont_be_nil
-              obj.exists?.must_equal true
-            end
-          end
-        end
-
-        # describe 'when the resource is not locatable' do
-        #   it 'should throw an exception'
-        # end
-      end
-    end
-
     # How to setup fixtures:
-    # CLI:
-    # API:
+    # Pass a fixture Hash to this method as the second arg.
+    # {
+    #   cli: { # Optional. If present, connection will say that CLI mode is available.
+    #     cmd: 'svc status core/httpd', # This registers the stub, so it will only respond to this command
+    #     stdout_file: 'svc-status-single.cli.txt', # A file under test/unit/fixtures, empty String if this key is absent
+    #     stderr_file: 'some-other-file.cli.txt', # A file under test/unit/fixtures, empty String if this key is absent
+    #     exit_status: 0,
+    #   },
+    #   api: { # Optional. If present, connection will say that API mode is available.
+    #     path: '/services', # This registers the stub, so it will only respond to this path
+    #     body_file: 'services-single.api.json', # A file under test/unit/fixtures, empty String if this key is absent
+    #     code: 200
+    #   }
+    # }
+
+    # About this method.
     # DRYing this up was very difficult, and I am sure there is a better way.
+    #  Problem 1: You can't just call this methd in an `it` block, because the
+    # module is not included there. So, make it a module function, and call
+    # it with its full name. Probably a better way.
+    #  Problem 2: within the body of this, we need to call mock() and friends;
+    # which means we need to be in an `it` block. So... and this is awful ...
+    # pass the it block (which is `self`, within the it block) as the test
+    # context and then perform a block-type instance-eval.
     def mock_inspec_context_object(test_cxt, fixture)
       test_cxt.instance_eval do
         inspec_cxt = mock
@@ -86,8 +85,8 @@ module InspecHabitat
           hab_cxn.stubs(:habitat_api_client).returns(htg)
           resp = mock
           resp.stubs(:code).returns(fixture[:api][:code])
-          if fixture[:api][:file]
-            api_path = File.join(unit_fixture_path, fixture[:api][:file])
+          if fixture[:api][:body_file]
+            api_path = File.join(unit_fixture_path, fixture[:api][:body_file])
             resp.stubs(:body).returns(JSON.parse(File.read(api_path), symbolize_names: true))
           end
           htg.stubs(:get_path).with(fixture[:api][:path]).returns(resp)
