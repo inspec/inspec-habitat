@@ -1,0 +1,17 @@
+{
+  "file_version": "1.1",
+  "credentials": {
+    "habitat": {
+      "int_test": {
+        "cli_ssh_user": "vagrant",
+        "cli_ssh_key_files": [
+          "test/integration/sup-fixture/.vagrant/machines/default/virtualbox/private_key"
+        ],
+        "cli_ssh_host": "127.0.0.1",
+        "cli_ssh_port": "7022",
+        "cli_ssh_verify_host_key": "never",
+        "sudo": true
+      }
+    }
+  }
+}

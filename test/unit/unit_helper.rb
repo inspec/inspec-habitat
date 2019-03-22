@@ -57,7 +57,7 @@ module InspecHabitat
     # which means we need to be in an `it` block. So... and this is awful ...
     # pass the it block (which is `self`, within the it block) as the test
     # context and then perform a block-type instance-eval.
-    def mock_inspec_context_object(test_cxt, fixture)
+    def mock_inspec_context_object(test_cxt, fixture) # rubocop:disable Metrics/AbcSize
       test_cxt.instance_eval do
         inspec_cxt = mock
         hab_cxn = mock
@@ -97,7 +97,7 @@ module InspecHabitat
 
       end
     end
-    module_function :mock_inspec_context_object
+    module_function :mock_inspec_context_object # rubocop:disable Style/AccessModifierDeclarations
   end
 end
 
