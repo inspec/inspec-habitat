@@ -29,17 +29,47 @@ class HabitatService < Inspec.resource(1)
     service&.dig(:pkg, :release)
   end
 
+  # Undocumented. Use `have_*topology` instead
   def topology
     service&.dig(:topology)
   end
 
+  def has_standalone_topology?
+    topology == 'standalone'
+  end
+
+  def has_leader_follower_topology?
+    topology == 'leader'
+  end
+
+  # Undocumented. Use `updated_by_*?` instead
   def update_strategy
     service&.dig(:update_strategy)
   end
 
-  # TODO: check format of response here, likely want to return strings
+  def updated_by_none?
+    update_strategy == 'none'
+  end
+
+  def updated_by_rolling?
+    update_strategy == 'rolling'
+  end
+
+  def updated_at_once?
+    update_strategy == 'at-once'
+  end
+
+  # Undocumented. Use `dependency_names` or `dependency_ids` instead.
   def dependencies
     service&.dig(:pkg, :deps) || []
+  end
+
+  def dependency_names
+    dependencies.map { |d| "#{d[:origin]}/#{d[:name]}"}
+  end
+
+  def dependency_ids
+    dependencies.map { |d| "#{d[:origin]}/#{d[:name]}/#{d[:version]}/#{d[:release]}"}
   end
 
   def exists?
