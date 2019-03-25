@@ -39,7 +39,7 @@ class HabitatService < Inspec.resource(1)
 
   # TODO: check format of response here, likely want to return strings
   def dependencies
-    service&.dig(:pkg, :deps)
+    service&.dig(:pkg, :deps) || []
   end
 
   def exists?
@@ -69,7 +69,7 @@ class HabitatService < Inspec.resource(1)
 
     # Prefer the API, it is much richer
     if inspec.backend.api_options_provided?
-      services = cxn.habitat_api_client.get_path('/services').body.select { |svc|
+      services = inspec.backend.habitat_api_client.get_path('/services').body.select { |svc|
         svc[:pkg][:origin] == origin &&
           svc[:pkg][:name] == name
       }
@@ -81,16 +81,16 @@ class HabitatService < Inspec.resource(1)
         # No such service
         @service = nil
       else
-        load_service_via_cli
+        load_service_via_cli(service_check_result.stdout)
       end
     end
   end
 
-  def load_service_via_cli
+  def load_service_via_cli(status_stdout)
     # package                           type        desired  state  elapsed (s)  pid   group
     # core/httpd/2.4.35/20190307151146  standalone  up       up     158169       1410  httpd.default
     @service = {}
-    line = service_check_result.stdout.split("\n")[1] # Skip header
+    line = status_stdout.split("\n")[1] # Skip header
     fields = line.split(/\s+/)
     @service[:pkg] = {}
     @service[:pkg][:ident] = fields[0]
