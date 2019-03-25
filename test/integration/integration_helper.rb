@@ -6,6 +6,7 @@ require 'train'
 require 'byebug'
 require 'json'
 require 'tmpdir'
+require 'forwardable'
 
 class Module
   include Minitest::Spec::DSL
