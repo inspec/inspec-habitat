@@ -3,7 +3,7 @@ title: About the habitat_service Resource
 platform: habitat
 ---
 
-# habitat\_service
+# habitat_service
 
 Use the `habitat_service` InSpec audit resource to test properties of a single Habitat Service.
 
@@ -32,7 +32,7 @@ If you use the CLI interface without the API, unavailable properties will behave
 
 If the Service is not found, then this resource behaves as follows:
 
- * `it { should exist }` will be a failing test. Check this test if you are unsure if the resource will exist; it is gaurenteed to be reliable in the future.
+ * `it { should exist }` will be a failing test. Check this test if you are unsure if the resource will exist; it is guaranteed to be reliable in the future.
  * `name` and `origin` will continue to return their values as set in the resource parameters. This allows output messaging to refer to the missing Service clearly.
  * All other single-value properties will return nil.
  * All Array and Hash-valued properties will return empty objects.
@@ -42,7 +42,7 @@ If the Service is not found, then this resource behaves as follows:
 
 ### Installation
 
-This resource is in the `inspec-habitat` resource pack. You can use the resource by setting an InSpec profile dependency on the resource pack.  See [inspec-habitat instructions](https://github.com/inspec/inspec-habitat#installation)
+This resource is in the `inspec-habitat` resource pack. You can use the resource by setting an InSpec profile dependency on the resource pack. See [inspec-habitat instructions](https://github.com/inspec/inspec-habitat#installation)
 
 ### Version
 
@@ -86,7 +86,7 @@ Use [properties](https://www.inspec.io/docs/reference/glossary/#property) to cre
 
 ### dependency_names
 
-Array of Strings. A list of the packages that this service depends on, in the form `dep_origin/dep_name`. This property does not contain version information; see `dependency_ids` for that.
+Array of Strings. A list of the packages that this service depends on, in the form of `dep_origin/dep_name`. This property does not contain version information; see `dependency_ids` for that.
 
 Requires API connection; not available via CLI.
 
@@ -99,7 +99,7 @@ end
 
 ### dependency_ids
 
-Array of Strings. A list of the packages that this service depends on, in the form `dep_origin/dep_name/1.2.3/20190325123456`. Note that version strings are up to the maintainers of the individual projects, and need not be of the form `1.2.3`
+Array of Strings. A list of the packages that this service depends on, in the form of `dep_origin/dep_name/1.2.3/20190325123456`. Note that version strings are up to the maintainers of the individual projects, and need not be of the form `1.2.3`
 
 Requires API connection; not available via CLI.
 
@@ -164,7 +164,7 @@ end
 
 Use [Matchers](https://www.inspec.io/docs/reference/glossary/#matcher) to create tests that test a true or false question.
 
-InSpec includes a number of universal matchers(https://www.inspec.io/docs/reference/matchers/).  See below for matchers specific to this resource.
+InSpec includes a number of [universal matchers](https://www.inspec.io/docs/reference/matchers/). See below for matchers specific to this resource.
 
 ### have_standalone_topology
 
