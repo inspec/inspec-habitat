@@ -1,0 +1,526 @@
+[
+  {
+    "all_pkg_binds": [],
+    "binding_mode": "strict",
+    "binds": [],
+    "bldr_url": "https://bldr.habitat.sh",
+    "cfg": {
+      "port": 11211
+    },
+    "channel": "stable",
+    "config_from": null,
+    "desired_state": "Up",
+    "health_check": "Unknown",
+    "hooks": {
+      "health_check": null,
+      "init": null,
+      "file_updated": null,
+      "reload": null,
+      "reconfigure": null,
+      "suitability": null,
+      "run": null,
+      "post_run": null,
+      "post_stop": null
+    },
+    "initialized": true,
+    "last_election_status": "None",
+    "manager_fs_cfg": {
+      "sup_root": "/hab/sup/default",
+      "data_path": "/hab/sup/default/data",
+      "specs_path": "/hab/sup/default/specs",
+      "member_id_file": "/hab/sup/default/MEMBER_ID",
+      "proc_lock_file": "/hab/sup/default/LOCK"
+    },
+    "needs_reconfiguration": false,
+    "needs_reload": false,
+    "pkg": {
+      "ident": "core/memcached/1.5.12/20190305231154",
+      "origin": "core",
+      "name": "memcached",
+      "version": "1.5.12",
+      "release": "20190305231154",
+      "deps": [
+        {
+          "origin": "core",
+          "name": "cacerts",
+          "version": "2018.12.05",
+          "release": "20190115014206"
+        },
+        {
+          "origin": "core",
+          "name": "cyrus-sasl",
+          "version": "2.1.26",
+          "release": "20190305214613"
+        },
+        {
+          "origin": "core",
+          "name": "glibc",
+          "version": "2.27",
+          "release": "20190115002733"
+        },
+        {
+          "origin": "core",
+          "name": "libevent",
+          "version": "2.0.22",
+          "release": "20190116223226"
+        },
+        {
+          "origin": "core",
+          "name": "linux-headers",
+          "version": "4.17.12",
+          "release": "20190115002705"
+        },
+        {
+          "origin": "core",
+          "name": "openssl-fips",
+          "version": "2.0.16",
+          "release": "20190115014207"
+        },
+        {
+          "origin": "core",
+          "name": "openssl",
+          "version": "1.0.2r",
+          "release": "20190305210149"
+        }
+      ],
+      "dependencies": [
+        "core/cacerts/2018.12.05/20190115014206",
+        "core/cyrus-sasl/2.1.26/20190305214613",
+        "core/glibc/2.27/20190115002733",
+        "core/libevent/2.0.22/20190116223226",
+        "core/linux-headers/4.17.12/20190115002705",
+        "core/openssl-fips/2.0.16/20190115014207",
+        "core/openssl/1.0.2r/20190305210149"
+      ],
+      "env": {
+        "PATH": "/hab/pkgs/core/memcached/1.5.12/20190305231154/bin:/hab/pkgs/core/glibc/2.27/20190115002733/bin:/hab/pkgs/core/cyrus-sasl/2.1.26/20190305214613/sbin:/hab/pkgs/core/libevent/2.0.22/20190116223226/bin:/hab/pkgs/core/openssl-fips/2.0.16/20190115014207/bin:/hab/pkgs/core/openssl/1.0.2r/20190305210149/bin:/hab/pkgs/core/busybox-static/1.29.2/20190115014552/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      },
+      "exposes": [
+        "11211"
+      ],
+      "exports": {
+        "port": "port"
+      },
+      "path": "/hab/pkgs/core/memcached/1.5.12/20190305231154",
+      "svc_path": "/hab/svc/memcached",
+      "svc_config_path": "/hab/svc/memcached/config",
+      "svc_config_install_path": "/hab/svc/memcached/config_install",
+      "svc_data_path": "/hab/svc/memcached/data",
+      "svc_files_path": "/hab/svc/memcached/files",
+      "svc_static_path": "/hab/svc/memcached/static",
+      "svc_var_path": "/hab/svc/memcached/var",
+      "svc_pid_file": "/hab/svc/memcached/PID",
+      "svc_run": "/hab/svc/memcached/run",
+      "svc_user": "hab",
+      "svc_group": "hab"
+    },
+    "process": {
+      "pid": 18977,
+      "state": "up",
+      "state_entered": 1553628075
+    },
+    "service_group": "memcached.default",
+    "spec_file": "/hab/sup/default/specs/memcached.spec",
+    "spec_ident": {
+      "origin": "core",
+      "name": "memcached",
+      "version": null,
+      "release": null
+    },
+    "spec_identifier": "core/memcached",
+    "svc_encrypted_password": null,
+    "health_check_interval": {
+      "secs": 30,
+      "nanos": 0
+    },
+    "sys": {
+      "version": "0.78.0/20190313123140",
+      "member_id": "ab9b6af6b65947a59482e2c7d8b0c0cd",
+      "ip": "10.0.2.15",
+      "hostname": "vagrant",
+      "gossip_ip": "0.0.0.0",
+      "gossip_port": 9638,
+      "ctl_gateway_ip": "127.0.0.1",
+      "ctl_gateway_port": 9632,
+      "http_gateway_ip": "0.0.0.0",
+      "http_gateway_port": 9631,
+      "permanent": false
+    },
+    "topology": "standalone",
+    "update_strategy": "none",
+    "user_config_updated": false
+  },
+  {
+    "all_pkg_binds": [],
+    "binding_mode": "strict",
+    "binds": [],
+    "bldr_url": "https://bldr.habitat.sh",
+    "cfg": {
+      "accessfilename": ".htaccess",
+      "canonicalname": "Off",
+      "group": "hab",
+      "hostnamelookups": "Off",
+      "keepalive": "On",
+      "keepaliverequests": 100,
+      "keepalivetimeout": 5,
+      "serveradmin": "you@example.com",
+      "servername": "localhost",
+      "serverport": "80",
+      "serversignature": "Off",
+      "servertokens": "Full",
+      "timeout": 60,
+      "user": "hab",
+      "default_modules": [
+        "access_compat",
+        "alias",
+        "auth_basic",
+        "authn_file",
+        "authn_core",
+        "authz_host",
+        "authz_groupfile",
+        "authz_user",
+        "autoindex",
+        "dir",
+        "env",
+        "filter",
+        "headers",
+        "log_config",
+        "mime",
+        "reqtimeout",
+        "setenvif",
+        "ssl",
+        "status",
+        "version"
+      ],
+      "listen": [
+        "80"
+      ],
+      "mod_info": {
+        "allow": "127.0.0.1"
+      },
+      "mod_proxy": {
+        "allow": "None",
+        "deny": "All",
+        "order": "Deny, Allow",
+        "require": "All Denied"
+      },
+      "mod_status": {
+        "allow": "127.0.0.1",
+        "extended": "Off"
+      },
+      "mpm": {
+        "maxconnectionsperchild": 10000,
+        "maxrequestworkers": 256,
+        "maxspareservers": 32,
+        "minspareservers": 16,
+        "serverlimit": 256,
+        "startservers": 16,
+        "threaded": false,
+        "threadlimit": 192,
+        "threadsperchild": 64,
+        "type": "prefork"
+      }
+    },
+    "channel": "stable",
+    "config_from": null,
+    "desired_state": "Up",
+    "health_check": "Ok",
+    "hooks": {
+      "health_check": null,
+      "init": {
+        "render_pair": "/hab/svc/httpd/hooks/init",
+        "stdout_log_path": "/hab/svc/httpd/logs/init.stdout.log",
+        "stderr_log_path": "/hab/svc/httpd/logs/init.stderr.log"
+      },
+      "file_updated": null,
+      "reload": {
+        "render_pair": "/hab/svc/httpd/hooks/reload",
+        "stdout_log_path": "/hab/svc/httpd/logs/reload.stdout.log",
+        "stderr_log_path": "/hab/svc/httpd/logs/reload.stderr.log"
+      },
+      "reconfigure": {
+        "render_pair": "/hab/svc/httpd/hooks/reconfigure",
+        "stdout_log_path": "/hab/svc/httpd/logs/reconfigure.stdout.log",
+        "stderr_log_path": "/hab/svc/httpd/logs/reconfigure.stderr.log"
+      },
+      "suitability": null,
+      "run": null,
+      "post_run": null,
+      "post_stop": null
+    },
+    "initialized": true,
+    "last_election_status": "None",
+    "manager_fs_cfg": {
+      "sup_root": "/hab/sup/default",
+      "data_path": "/hab/sup/default/data",
+      "specs_path": "/hab/sup/default/specs",
+      "member_id_file": "/hab/sup/default/MEMBER_ID",
+      "proc_lock_file": "/hab/sup/default/LOCK"
+    },
+    "needs_reconfiguration": false,
+    "needs_reload": false,
+    "pkg": {
+      "ident": "core/httpd/2.4.35/20190307151146",
+      "origin": "core",
+      "name": "httpd",
+      "version": "2.4.35",
+      "release": "20190307151146",
+      "deps": [
+        {
+          "origin": "core",
+          "name": "acl",
+          "version": "2.2.53",
+          "release": "20190115012136"
+        },
+        {
+          "origin": "core",
+          "name": "apr-util",
+          "version": "1.6.1",
+          "release": "20190307150947"
+        },
+        {
+          "origin": "core",
+          "name": "apr",
+          "version": "1.6.5",
+          "release": "20190307150747"
+        },
+        {
+          "origin": "core",
+          "name": "attr",
+          "version": "2.4.48",
+          "release": "20190115012129"
+        },
+        {
+          "origin": "core",
+          "name": "bash",
+          "version": "4.4.19",
+          "release": "20190115012619"
+        },
+        {
+          "origin": "core",
+          "name": "binutils",
+          "version": "2.31.1",
+          "release": "20190115003743"
+        },
+        {
+          "origin": "core",
+          "name": "bzip2",
+          "version": "1.0.6",
+          "release": "20190115011950"
+        },
+        {
+          "origin": "core",
+          "name": "cacerts",
+          "version": "2018.12.05",
+          "release": "20190115014206"
+        },
+        {
+          "origin": "core",
+          "name": "coreutils",
+          "version": "8.30",
+          "release": "20190115012313"
+        },
+        {
+          "origin": "core",
+          "name": "db",
+          "version": "5.3.28",
+          "release": "20190115012845"
+        },
+        {
+          "origin": "core",
+          "name": "expat",
+          "version": "2.2.5",
+          "release": "20190115012836"
+        },
+        {
+          "origin": "core",
+          "name": "gcc-libs",
+          "version": "8.2.0",
+          "release": "20190115011926"
+        },
+        {
+          "origin": "core",
+          "name": "gdbm",
+          "version": "1.17",
+          "release": "20190115012826"
+        },
+        {
+          "origin": "core",
+          "name": "glibc",
+          "version": "2.27",
+          "release": "20190115002733"
+        },
+        {
+          "origin": "core",
+          "name": "gmp",
+          "version": "6.1.2",
+          "release": "20190115003943"
+        },
+        {
+          "origin": "core",
+          "name": "grep",
+          "version": "3.1",
+          "release": "20190115012541"
+        },
+        {
+          "origin": "core",
+          "name": "less",
+          "version": "530",
+          "release": "20190115013008"
+        },
+        {
+          "origin": "core",
+          "name": "libcap",
+          "version": "2.25",
+          "release": "20190115012150"
+        },
+        {
+          "origin": "core",
+          "name": "libiconv",
+          "version": "1.14",
+          "release": "20190115155025"
+        },
+        {
+          "origin": "core",
+          "name": "linux-headers",
+          "version": "4.17.12",
+          "release": "20190115002705"
+        },
+        {
+          "origin": "core",
+          "name": "ncurses",
+          "version": "6.1",
+          "release": "20190115012027"
+        },
+        {
+          "origin": "core",
+          "name": "openssl-fips",
+          "version": "2.0.16",
+          "release": "20190115014207"
+        },
+        {
+          "origin": "core",
+          "name": "openssl",
+          "version": "1.0.2r",
+          "release": "20190305210149"
+        },
+        {
+          "origin": "core",
+          "name": "pcre",
+          "version": "8.42",
+          "release": "20190115012526"
+        },
+        {
+          "origin": "core",
+          "name": "perl",
+          "version": "5.28.0",
+          "release": "20190115013014"
+        },
+        {
+          "origin": "core",
+          "name": "readline",
+          "version": "7.0.3",
+          "release": "20190115012607"
+        },
+        {
+          "origin": "core",
+          "name": "sed",
+          "version": "4.5",
+          "release": "20190115012152"
+        },
+        {
+          "origin": "core",
+          "name": "zlib",
+          "version": "1.2.11",
+          "release": "20190115003728"
+        }
+      ],
+      "dependencies": [
+        "core/acl/2.2.53/20190115012136",
+        "core/apr-util/1.6.1/20190307150947",
+        "core/apr/1.6.5/20190307150747",
+        "core/attr/2.4.48/20190115012129",
+        "core/bash/4.4.19/20190115012619",
+        "core/binutils/2.31.1/20190115003743",
+        "core/bzip2/1.0.6/20190115011950",
+        "core/cacerts/2018.12.05/20190115014206",
+        "core/coreutils/8.30/20190115012313",
+        "core/db/5.3.28/20190115012845",
+        "core/expat/2.2.5/20190115012836",
+        "core/gcc-libs/8.2.0/20190115011926",
+        "core/gdbm/1.17/20190115012826",
+        "core/glibc/2.27/20190115002733",
+        "core/gmp/6.1.2/20190115003943",
+        "core/grep/3.1/20190115012541",
+        "core/less/530/20190115013008",
+        "core/libcap/2.25/20190115012150",
+        "core/libiconv/1.14/20190115155025",
+        "core/linux-headers/4.17.12/20190115002705",
+        "core/ncurses/6.1/20190115012027",
+        "core/openssl-fips/2.0.16/20190115014207",
+        "core/openssl/1.0.2r/20190305210149",
+        "core/pcre/8.42/20190115012526",
+        "core/perl/5.28.0/20190115013014",
+        "core/readline/7.0.3/20190115012607",
+        "core/sed/4.5/20190115012152",
+        "core/zlib/1.2.11/20190115003728"
+      ],
+      "env": {
+        "PATH": "/hab/pkgs/core/httpd/2.4.35/20190307151146/bin:/hab/pkgs/core/apr/1.6.5/20190307150747/bin:/hab/pkgs/core/apr-util/1.6.1/20190307150947/bin:/hab/pkgs/core/bash/4.4.19/20190115012619/bin:/hab/pkgs/core/expat/2.2.5/20190115012836/bin:/hab/pkgs/core/glibc/2.27/20190115002733/bin:/hab/pkgs/core/openssl/1.0.2r/20190305210149/bin:/hab/pkgs/core/pcre/8.42/20190115012526/bin:/hab/pkgs/core/perl/5.28.0/20190115013014/bin:/hab/pkgs/core/sed/4.5/20190115012152/bin:/hab/pkgs/core/grep/3.1/20190115012541/bin:/hab/pkgs/core/acl/2.2.53/20190115012136/bin:/hab/pkgs/core/attr/2.4.48/20190115012129/bin:/hab/pkgs/core/binutils/2.31.1/20190115003743/bin:/hab/pkgs/core/coreutils/8.30/20190115012313/bin:/hab/pkgs/core/libcap/2.25/20190115012150/bin:/hab/pkgs/core/ncurses/6.1/20190115012027/bin:/hab/pkgs/core/openssl-fips/2.0.16/20190115014207/bin:/hab/pkgs/core/bzip2/1.0.6/20190115011950/bin:/hab/pkgs/core/db/5.3.28/20190115012845/bin:/hab/pkgs/core/gdbm/1.17/20190115012826/bin:/hab/pkgs/core/less/530/20190115013008/bin:/hab/pkgs/core/busybox-static/1.29.2/20190115014552/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      },
+      "exposes": [
+        "80"
+      ],
+      "exports": {
+        "port": "serverport"
+      },
+      "path": "/hab/pkgs/core/httpd/2.4.35/20190307151146",
+      "svc_path": "/hab/svc/httpd",
+      "svc_config_path": "/hab/svc/httpd/config",
+      "svc_config_install_path": "/hab/svc/httpd/config_install",
+      "svc_data_path": "/hab/svc/httpd/data",
+      "svc_files_path": "/hab/svc/httpd/files",
+      "svc_static_path": "/hab/svc/httpd/static",
+      "svc_var_path": "/hab/svc/httpd/var",
+      "svc_pid_file": "/hab/svc/httpd/PID",
+      "svc_run": "/hab/svc/httpd/run",
+      "svc_user": "root",
+      "svc_group": "root"
+    },
+    "process": {
+      "pid": 1410,
+      "state": "up",
+      "state_entered": 1553048750
+    },
+    "service_group": "httpd.default",
+    "spec_file": "/hab/sup/default/specs/httpd.spec",
+    "spec_ident": {
+      "origin": "core",
+      "name": "httpd",
+      "version": null,
+      "release": null
+    },
+    "spec_identifier": "core/httpd",
+    "svc_encrypted_password": null,
+    "health_check_interval": {
+      "secs": 30,
+      "nanos": 0
+    },
+    "sys": {
+      "version": "0.78.0/20190313123140",
+      "member_id": "ab9b6af6b65947a59482e2c7d8b0c0cd",
+      "ip": "10.0.2.15",
+      "hostname": "vagrant",
+      "gossip_ip": "0.0.0.0",
+      "gossip_port": 9638,
+      "ctl_gateway_ip": "127.0.0.1",
+      "ctl_gateway_port": 9632,
+      "http_gateway_ip": "0.0.0.0",
+      "http_gateway_port": 9631,
+      "permanent": false
+    },
+    "topology": "standalone",
+    "update_strategy": "none",
+    "user_config_updated": false
+  }
+]
