@@ -1,0 +1,3 @@
+package                               type        desired  state  elapsed (s)  pid    group
+core/memcached/1.5.12/20190305231154  standalone  up       up     12           18977  memcached.default
+core/httpd/2.4.35/20190307151146      standalone  up       up     579337       1410   httpd.default
