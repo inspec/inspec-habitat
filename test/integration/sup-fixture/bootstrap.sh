@@ -39,10 +39,11 @@ systemctl start habitat
 systemctl enable habitat
 fi
 
-# Install a package
-pkg_origin=core
-pkg_name=httpd
+# Install at leaset two services
+echo "Installing core/httpd"
+hab pkg install core/httpd
+hab svc load core/httpd
 
-echo "Installing $pkg_origin/$pkg_name"
-hab pkg install "$pkg_origin/$pkg_name"
-hab svc load "$pkg_origin/$pkg_name"
+echo "Installing core/memcached"
+hab pkg install core/memcached
+hab svc load core/memcached
