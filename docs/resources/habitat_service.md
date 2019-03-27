@@ -99,7 +99,7 @@ end
 
 ### dependency_ids
 
-Array of Strings. A list of the packages that this service depends on, in the form of `dep_origin/dep_name/1.2.3/20190325123456`. Note that version strings are up to the maintainers of the individual projects, and need not be of the form `1.2.3`
+Array of Strings. A list of the packages that this service depends on, in the form of `dep_origin/dep_name/1.2.3/20190325123456`. This value may be difficult to compare, because the version identifier (`1.2.3`, the third component) may be formatted in any way the maintainer of the project chooses; they need not be of the form `1.2.3`.
 
 Requires API connection; not available via CLI.
 
@@ -168,7 +168,7 @@ InSpec includes a number of [universal matchers](https://www.inspec.io/docs/refe
 
 ### have_standalone_topology
 
-True if the service is configured in a [`standalone`](https://www.habitat.sh/docs/using-habitat/#standalone) topology.
+This Matcher returns `true` if the service is configured in a [`standalone`](https://www.habitat.sh/docs/using-habitat/#standalone) topology.
 
 ```ruby
 describe habitat_service(origin: 'core', name: 'httpd') do
@@ -178,7 +178,7 @@ end
 
 ### have_leader_follower_topology
 
-True if the service is configured in a [`leader-follower`](https://www.habitat.sh/docs/using-habitat/#leader-follower-topology) topology.
+This Matcher returns `true` if the service is configured in a [`leader-follower`](https://www.habitat.sh/docs/using-habitat/#leader-follower-topology) topology.
 
 ```ruby
 describe habitat_service(origin: 'core', name: 'httpd') do
@@ -188,7 +188,7 @@ end
 
 ### be_updated_by_none
 
-True if the update strategy for the Service is [`none`](https://www.habitat.sh/docs/using-habitat/#none-strategy).
+This Matcher returns `true` if the update strategy for the Service is [`none`](https://www.habitat.sh/docs/using-habitat/#none-strategy).
 
 Requires API connection; not available via CLI.
 
@@ -200,7 +200,7 @@ end
 
 ### be_updated_by_rolling
 
-True if the update strategy for the Service is [`rolling`](https://www.habitat.sh/docs/using-habitat/#rolling-strategy).
+This Matcher returns `true` if the update strategy for the Service is [`rolling`](https://www.habitat.sh/docs/using-habitat/#rolling-strategy).
 
 Requires API connection; not available via CLI.
 
@@ -212,7 +212,7 @@ end
 
 ### be_updated_at_once
 
-True if the update strategy for the Service is [`at once`](https://www.habitat.sh/docs/using-habitat/#at-once-strategy).
+This Matcher returns `true` if the update strategy for the Service is [`at once`](https://www.habitat.sh/docs/using-habitat/#at-once-strategy).
 
 Requires API connection; not available via CLI.
 
