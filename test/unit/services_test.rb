@@ -1,7 +1,8 @@
 require_relative './unit_helper'
 require_relative '../../libraries/habitat_services'
 
-describe HabitatServices do # rubocop:disable Metrics/BlockLength
+# rubocop:disable Metrics/BlockLength
+describe HabitatServices do
   let(:unit_test_path) { File.expand_path(File.join('test', 'unit')) }
   let(:unit_fixture_path) { File.join(unit_test_path, 'fixtures') }
 
