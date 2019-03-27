@@ -22,23 +22,23 @@ class HabitatService < Inspec.resource(1)
   end
 
   def version
-    service.dig('pkg', 'version') unless service.nil?
+    service&.dig('pkg', 'version')
   end
 
   def release
-    service.dig('pkg', 'release') unless service.nil?
+    service&.dig('pkg', 'release')
   end
 
   def topology
-    service.dig('topology') unless service.nil?
+    service&.dig('topology')
   end
 
   def update_strategy
-    service.dig('update_strategy') unless service.nil?
+    service&.dig('update_strategy')
   end
 
   def deps
-    service.dig('pkg', 'deps') unless service.nil?
+    service&.dig('pkg', 'deps')
   end
 
   def exists?
@@ -46,7 +46,7 @@ class HabitatService < Inspec.resource(1)
   end
 
   def pkg_id
-    service.dig('pkg', 'ident') unless service.nil?
+    service&.dig('pkg', 'ident')
   end
 
   def to_s
