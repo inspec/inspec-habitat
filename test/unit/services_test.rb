@@ -1,7 +1,8 @@
 require_relative './unit_helper'
 require_relative '../../libraries/habitat_services'
 
-describe HabitatServices do # rubocop:disable Metrics/BlockLength
+# rubocop:disable Metrics/BlockLength
+describe HabitatServices do
   let(:unit_test_path) { File.expand_path(File.join('test', 'unit')) }
   let(:unit_fixture_path) { File.join(unit_test_path, 'fixtures') }
 
@@ -101,12 +102,25 @@ describe HabitatServices do # rubocop:disable Metrics/BlockLength
 
     it 'should filter correctly' do
       InspecHabitat::UnitTestHelper.mock_inspec_context_object(self, fixture)
-      # TODO
+      svcs.where { origin == 'core' }.count.must_equal 2
+      svcs.where { name == 'httpd' }.count.must_equal 1
+      svcs.where { dependency_names.include? 'core/pcre' }.names.must_equal ['httpd']
+      svcs.where { topology == 'standalone' }.count.must_equal 2
+      svcs.where { update_strategy == 'none' }.count.must_equal 2
+      svcs.where { release > '20190305231155' }.count.must_equal 1
+      svcs.where { version == '1.5.12' }.count.must_equal 1
     end
 
-    it 'should expose criteria as porperties correctly' do
+    it 'should expose criteria as properties correctly' do
       InspecHabitat::UnitTestHelper.mock_inspec_context_object(self, fixture)
-      # TODO
+      svcs.origins.must_equal ['core']
+      svcs.names.sort.must_equal %w{httpd memcached}
+      svcs.dependency_names.must_include 'core/pcre'
+      svcs.dependency_names.wont_include 'core/gcc'
+      svcs.topologies.must_equal ['standalone']
+      svcs.update_strategies.must_equal ['none']
+      svcs.releases.sort.must_equal %w{20190305231154 20190307151146}
+      svcs.versions.sort.must_equal ['1.5.12', '2.4.35']
     end
   end
 
@@ -127,12 +141,24 @@ describe HabitatServices do # rubocop:disable Metrics/BlockLength
 
     it 'should filter correctly' do
       InspecHabitat::UnitTestHelper.mock_inspec_context_object(self, fixture)
-      # TODO
+      svcs.where { origin == 'core' }.count.must_equal 2
+      svcs.where { name == 'httpd' }.count.must_equal 1
+      svcs.where { dependency_names.include? 'core/pcre' }.names.must_equal [] # Not available by CLI
+      svcs.where { topology == 'standalone' }.count.must_equal 2
+      svcs.where { update_strategy == 'none' }.count.must_equal 0 # Not available by CLI
+      svcs.where { release > '20190305231155' }.count.must_equal 1
+      svcs.where { version == '1.5.12' }.count.must_equal 1
     end
 
-    it 'should expose criteria as porperties correctly' do
+    it 'should expose criteria as properties correctly' do
       InspecHabitat::UnitTestHelper.mock_inspec_context_object(self, fixture)
-      # TODO
+      svcs.origins.must_equal ['core']
+      svcs.names.sort.must_equal %w{httpd memcached}
+      svcs.dependency_names.must_be_empty # Not available by CLI
+      svcs.topologies.must_equal ['standalone']
+      svcs.update_strategies.must_be_empty # Not available by CLI
+      svcs.releases.sort.must_equal %w{20190305231154 20190307151146}
+      svcs.versions.sort.must_equal ['1.5.12', '2.4.35']
     end
   end
 end
