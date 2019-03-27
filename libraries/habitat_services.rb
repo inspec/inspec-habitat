@@ -25,6 +25,11 @@ class HabitatServices < Inspec.resource(1)
     exist?
   end
 
+  # Returns Array of Hashes, each with params suitable for passing to `habitat_service` (singular)
+  def habitat_service_params
+    raw_data.map { |row| { origin: row[:origin], name: row[:name] } }
+  end
+
   private
 
   # Return Array of Hashes for FilterTable
