@@ -5,7 +5,7 @@ platform: habitat
 
 # habitat_service
 
-Use the `habitat_service` InSpec audit resource to test properties of a single Habitat Service.
+Use the `habitat_service` InSpec audit resource to test properties of a single Habitat service.
 
 ## Examples
 
@@ -30,12 +30,12 @@ If you use the CLI interface without the API, unavailable properties will behave
 
 ### Behavior when not found
 
-If the Service is not found, then this resource behaves as follows:
+If the service is not found, then this resource behaves as follows:
 
  * `it { should exist }` will be a failing test. Check this test if you are unsure if the resource will exist; it is guaranteed to be reliable in the future.
  * `name` and `origin` will continue to return their values as set in the resource parameters. This allows output messaging to refer to the missing Service clearly.
  * All other single-value properties will return nil.
- * All Array and Hash-valued properties will return empty objects.
+ * All array and hash-valued properties will return empty objects.
  * All matchers will return false.
 
 ## Availability
@@ -50,11 +50,11 @@ This resource was first available in version 0.1.0 of the resource pack.
 
 ## Resource Parameters
 
-Use [resource parameters](https://www.inspec.io/docs/reference/glossary/#resource-parameter) to identify the particular Service you wish to test.
+Use [resource parameters](https://www.inspec.io/docs/reference/glossary/#resource-parameter) to identify the particular service you wish to test.
 
 ### origin
 
-Required String. The name of the `origin` (distribution facility) of the package that provides the service.
+Required string. The name of the `origin` (distribution facility) of the package that provides the service.
 
 ```ruby
 # Most common origin is 'core', publicly distributed packages created by Chef
@@ -70,7 +70,7 @@ end
 
 ### name
 
-Required String. The name (unique within the namespace of the origin) of the package that provides the service.
+Required string. The name (unique within the namespace of the origin) of the package that provides the service.
 
 ```ruby
 
@@ -82,11 +82,11 @@ end
 
 ## Properties
 
-Use [properties](https://www.inspec.io/docs/reference/glossary/#property) to create tests that compare an expected to value to the actual value.
+Use [properties](https://www.inspec.io/docs/reference/glossary/#property) to create tests that compare an expected value to the actual value.
 
 ### dependency_names
 
-Array of Strings. A list of the packages that this service depends on, in the form of `dep_origin/dep_name`. This property does not contain version information; see `dependency_ids` for that.
+Array of strings. A list of the packages that this service depends on, in the form of `dep_origin/dep_name`. This property does not contain version information; see `dependency_ids` for that.
 
 Requires API connection; not available via CLI.
 
@@ -99,7 +99,7 @@ end
 
 ### dependency_ids
 
-Array of Strings. A list of the packages that this service depends on, in the form of `dep_origin/dep_name/1.2.3/20190325123456`. This value may be difficult to compare, because the version identifier (`1.2.3`, the third component) may be formatted in any way the maintainer of the project chooses; they need not be of the form `1.2.3`.
+Array of strings. A list of the packages that this service depends on, in the form of `dep_origin/dep_name/1.2.3/20190325123456`. This value may be difficult to compare, because the version identifier (`1.2.3`, the third component) may be formatted in any way the maintainer of the project chooses; they need not be of the form `1.2.3`.
 
 Requires API connection; not available via CLI.
 
@@ -112,7 +112,7 @@ end
 
 ### name
 
-The name of the Service, as passed in via the resource parameter. Always available, even if the resource was not found. See also [origin](#origin) and [version](#version).
+The name of the service, as passed in via the resource parameter. Always available, even if the resource was not found. See also [origin](#origin) and [version](#version).
 
 ```ruby
 describe habitat_service(origin: 'core', name: 'httpd') do
@@ -122,7 +122,7 @@ end
 
 ### origin
 
-The origin name of the Service, as passed in via the resource parameter. Always available, even if the resource was not found. See also [name](#name) and [version](#version).
+The origin name of the service, as passed in via the resource parameter. Always available, even if the resource was not found. See also [name](#name) and [version](#version).
 
 ```ruby
 describe habitat_service(origin: 'core', name: 'httpd') do
@@ -132,7 +132,7 @@ end
 
 ### pkg_id
 
-String. The full package identifier of the package that supports the Service, in the form `origin/name/version/release`.  See also [name](#name) and [version](#version).
+String. The full package identifier of the package that supports the service, in the form `origin/name/version/release`.  See also [name](#name) and [version](#version).
 
 ```ruby
 describe habitat_service(origin: 'core', name: 'httpd') do
@@ -142,7 +142,7 @@ end
 
 ### release
 
-String. The release number of the package that supports the Service, as assigned by the packager. These values are always Strings, but are 14-digit timestamps. See also [version](#version).
+String. The release number of the package that supports the service, as assigned by the packager. These values are always strings, but are 14-digit timestamps. See also [version](#version).
 
 ```ruby
 describe habitat_service(origin: 'core', name: 'httpd') do
@@ -152,7 +152,7 @@ end
 
 ### version
 
-The version of the package that supports the Service, as assigned by the maintainer of the package project.  While many versions are of the 3-digit form, there is no set rule, and exceptions are common. See also [release](#release).
+The version of the package that supports the service, as assigned by the maintainer of the package project.  While many versions are of the 3-digit form, there is no set rule, and exceptions are common. See also [release](#release).
 
 ```ruby
 describe habitat_service(origin: 'core', name: 'httpd') do
@@ -162,13 +162,13 @@ end
 
 ## Matchers
 
-Use [Matchers](https://www.inspec.io/docs/reference/glossary/#matcher) to create tests that test a true or false question.
+Use [matchers](https://www.inspec.io/docs/reference/glossary/#matcher) to create tests that test a true or false question.
 
 InSpec includes a number of [universal matchers](https://www.inspec.io/docs/reference/matchers/). See below for matchers specific to this resource.
 
 ### have_standalone_topology
 
-This Matcher returns `true` if the service is configured in a [`standalone`](https://www.habitat.sh/docs/using-habitat/#standalone) topology.
+This matcher returns `true` if the service is configured in a [`standalone`](https://www.habitat.sh/docs/using-habitat/#standalone) topology.
 
 ```ruby
 describe habitat_service(origin: 'core', name: 'httpd') do
@@ -178,7 +178,7 @@ end
 
 ### have_leader_follower_topology
 
-This Matcher returns `true` if the service is configured in a [`leader-follower`](https://www.habitat.sh/docs/using-habitat/#leader-follower-topology) topology.
+This matcher returns `true` if the service is configured in a [`leader-follower`](https://www.habitat.sh/docs/using-habitat/#leader-follower-topology) topology.
 
 ```ruby
 describe habitat_service(origin: 'core', name: 'httpd') do
@@ -188,7 +188,7 @@ end
 
 ### be_updated_by_none
 
-This Matcher returns `true` if the update strategy for the Service is [`none`](https://www.habitat.sh/docs/using-habitat/#none-strategy).
+This matcher returns `true` if the update strategy for the service is [`none`](https://www.habitat.sh/docs/using-habitat/#none-strategy).
 
 Requires API connection; not available via CLI.
 
@@ -200,7 +200,7 @@ end
 
 ### be_updated_by_rolling
 
-This Matcher returns `true` if the update strategy for the Service is [`rolling`](https://www.habitat.sh/docs/using-habitat/#rolling-strategy).
+This matcher returns `true` if the update strategy for the service is [`rolling`](https://www.habitat.sh/docs/using-habitat/#rolling-strategy).
 
 Requires API connection; not available via CLI.
 
@@ -212,7 +212,7 @@ end
 
 ### be_updated_at_once
 
-This Matcher returns `true` if the update strategy for the Service is [`at once`](https://www.habitat.sh/docs/using-habitat/#at-once-strategy).
+This matcher returns `true` if the update strategy for the service is [`at once`](https://www.habitat.sh/docs/using-habitat/#at-once-strategy).
 
 Requires API connection; not available via CLI.
 
