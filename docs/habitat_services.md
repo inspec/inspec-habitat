@@ -5,9 +5,9 @@ platform: habitat
 
 # habitat_services
 
-Use the `habitat_services` (plural) InSpec audit resource to list Habitat Services, and perform bulk operations.
+Use the `habitat_service` (singular) InSpec audit resource to perform in-depth auditing of a single service.
 
-Use the `habitat_service` (singular) InSpec audit resource to perform in-depth auditing of a single Service.
+Use the `habitat_services` (plural) InSpec audit resource to list Habitat services, and perform bulk operations.
 
 ## Examples
 
@@ -61,7 +61,7 @@ end
 
 Habitat exposes certain data via the CLI, and other data via the HTTP Gateway API. To enjoy the full functionality of this resource, use a set of credentials that includes the API. Limited data is available by CLI. See the [train-habitat](https://github.com/inspec/train-habitat) documentation for more details.
 
-If you use the CLI interface without the API, unavailable properties will return empty Arrays or `nil`, and unavailable filter criteria will never match. See each property and filter criteria for details.
+If you use the CLI interface without the API, unavailable properties will return empty arrays or `nil`, and unavailable filter criteria will never match. See each property and filter criteria for details.
 
 ## Availability
 
@@ -81,11 +81,11 @@ This resource does not accept resource parameters, which is typical for plural r
 
 ## Filter Criteria
 
-[Filter criteria](https://www.inspec.io/docs/reference/glossary/#filter-criteria) are used to select which Services you wish to examine. If no filter criteria are used, all Services are selected.
+[Filter criteria](https://www.inspec.io/docs/reference/glossary/#filter-criteria) are used to select which services you wish to examine. If no filter criteria are used, all Services are selected.
 
 ### dependency_names
 
-An Array of Strings in the form `origin/name`. Each String is the qualified name of a dependency of a Service that is being filtered.
+An array of strings in the form `origin/name`. Each string is the qualified name of a dependency of a service that is being filtered.
 
 Requires API connection; not available (never matches) via CLI.
 
@@ -97,7 +97,7 @@ end
 
 ### name
 
-String. The (unqualified) name of the Service under consideration.
+String. The (unqualified) name of the service under consideration.
 
 ```ruby
 # No services named *ftp* permitted
@@ -108,7 +108,7 @@ end
 
 ### origin
 
-String. The name of the origin that created the package that backs the Service under consideration.
+String. The name of the origin that created the package that backs the service under consideration.
 
 ```ruby
 # Examine only services released by Chef
@@ -119,7 +119,7 @@ end
 
 ### release
 
-String. A 14-digit timestamp, in the format `YYYYMMDDHHMmmSS`. The timestamp reflects the time at which the package backing the Service was released. These strings are sortable and comparable.
+String. A 14-digit timestamp, in the format `YYYYMMDDHHMmmSS`. The timestamp reflects the time at which the package backing the service was released. These strings are sortable and comparable.
 
 ```ruby
 # Examine packages older than Jan 1 2018
@@ -141,7 +141,7 @@ end
 
 ### topology
 
-String reflecting the topology of the Service. Values include `standalone` and `leader` (for leader-follower). See [the habitat docs](https://www.habitat.sh/docs/using-habitat/#topologies) for implications of these values.
+String reflecting the topology of the service. Values include `standalone` and `leader` (for leader-follower). See [the Habitat docs](https://www.habitat.sh/docs/using-habitat/#topologies) for implications of these values.
 
 ```ruby
 # HA or the highway
@@ -152,7 +152,7 @@ end
 
 ### update_strategy
 
-String reflecting how the software package backing the Service should be updated. Values include `none`, `rolling`, and `at-once`. See [the habitat docs](https://www.habitat.sh/docs/using-habitat/#using-updates) for implications of these values.
+String reflecting how the software package backing the service should be updated. Values include `none`, `rolling`, and `at-once`. See [the Habitat docs](https://www.habitat.sh/docs/using-habitat/#using-updates) for implications of these values.
 
 Requires API connection; not available (never matches) via CLI.
 
@@ -169,7 +169,7 @@ Use [properties](https://www.inspec.io/docs/reference/glossary/#property) to cre
 
 ### count
 
-Number. The count of services that matched the Filter Criteria.
+Number. The count of services that matched the filter criteria.
 
 ```ruby
 # Expect 12 total
@@ -185,9 +185,9 @@ end
 
 ### dependency_names
 
-Array of Strings in the form `origin/name`. Each String is the qualified name of a dependency of a Service that was selected by the filter criteria. This list is de-duplicated.
+Array of strings in the form `origin/name`. Each string is the qualified name of a dependency of a service that was selected by the filter criteria. This list is de-duplicated.
 
-Requires API connection; not available (always an empty Array) via CLI.
+Requires API connection; not available (always an empty array) via CLI.
 
 ```ruby
 describe habitat_services do
@@ -211,7 +211,7 @@ end
 
 ### names
 
-Array of Strings. The unqualified name of the Service, such as 'httpd'. This list is de-duplicated, though it is almost always unique anyway.
+Array of strings. The unqualified name of the service, such as 'httpd'. This list is de-duplicated, though a name is almost always unique anyway.
 
 ```ruby
 describe habitat_services do
@@ -223,7 +223,7 @@ end
 
 ### origins
 
-Array of Strings. The names of the origins that created the packages that backs the Services that were matched.
+Array of strings. The names of the origins that created the packages that backs the services that were matched.
 This list is de-duplicated.
 
 ```ruby
@@ -238,7 +238,7 @@ end
 
 ### releases
 
-Array of Strings. Each String is a 14-digit timestamp, in the format `YYYYMMDDHHMmmSS`. The timestamp reflects the time at which the package backing the Service was released. These strings are sortable and comparable. This list is de-duplicated.
+Array of strings. Each string is a 14-digit timestamp, in the format `YYYYMMDDHHMmmSS`. The timestamp reflects the time at which the package backing the service was released. These strings are sortable and comparable. This list is de-duplicated.
 
 ```ruby
 # We had a bad Monday
@@ -249,7 +249,7 @@ end
 
 ### topologies
 
-Array of Strings reflecting the topology of the matched Services. Values include `standalone` and `leader` (for leader-follower). See [the habitat docs](https://www.habitat.sh/docs/using-habitat/#topologies) for implications of these values. This list is de-duplicated.
+Array of strings reflecting the topology of the matched services. Values include `standalone` and `leader` (for leader-follower). See [the Habitat docs](https://www.habitat.sh/docs/using-habitat/#topologies) for implications of these values. This list is de-duplicated.
 
 ```ruby
 describe habitat_services do
@@ -259,7 +259,7 @@ end
 
 ### update_strategies
 
-Array of Strings reflecting how the software package backing the Services that matched the filter should be updated. Values include `none`, `rolling`, and `at-once`. See [the habitat docs](https://www.habitat.sh/docs/using-habitat/#using-updates) for implications of these values. This list is de-duplicated.
+Array of strings reflecting how the software package backing the services that matched the filter should be updated. Values include `none`, `rolling`, and `at-once`. See [the Habitat docs](https://www.habitat.sh/docs/using-habitat/#using-updates) for implications of these values. This list is de-duplicated.
 
 Requires API connection; not available (never matches) via CLI.
 
@@ -272,7 +272,7 @@ end
 
 ## Matchers
 
-Use [Matchers](https://www.inspec.io/docs/reference/glossary/#matcher) to create tests that test a true or false question.
+Use [matchers](https://www.inspec.io/docs/reference/glossary/#matcher) to create tests that test a true or false question.
 
 InSpec includes a number of [universal matchers](https://www.inspec.io/docs/reference/matchers/).
 
