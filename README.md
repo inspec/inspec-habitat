@@ -10,7 +10,7 @@
 ## Use the Resources
 
 Since this is an InSpec resource pack, it only defines InSpec resources. To use
-these resources in your own controls you should create your own profile:
+these resources in your own controls, you should create your own profile:
 
 ### Create a new profile
 
@@ -47,7 +47,7 @@ Resource documentation is located at the [main InSpec docs website](https://www.
 
 ## Contributing
 
-If you'd like to contribute to this project please see [Contributing
+If you'd like to contribute to this project, please see [Contributing
 Rules](CONTRIBUTING.md). The following instructions will help you get your
 development environment setup to run integration tests.
 
@@ -55,12 +55,12 @@ development environment setup to run integration tests.
 
   1. Ruby 2.3 or later
   2. Bundler
-  3. Run `bundle install`.
+  3. Run `bundle install`
 
 ### Prerequisites for Integration Testing
 
   1. Vagrant
-  2. VirtualBox, or configure your Vagrant installation to use your favorite provider.
+  2. VirtualBox, or configure your Vagrant installation to use your favorite provider
 
 ### Rake commands
 
@@ -72,9 +72,9 @@ Runs the Ruby syntax checker against code in this repository.
 $ bundle exec rake syntax
 ```
 
-#### Rubocop
+#### RuboCop
 
-Runs Rubocop syntax checker against code in this repository.
+Runs RuboCop syntax checker against code in this repository.
 
 ```
 $ bundle exec rake rubocop
@@ -82,7 +82,7 @@ $ bundle exec rake rubocop
 
 #### Lint
 
-Runs Rubocop and syntax checks against code in this repository. This is the default Rake task.
+Runs RuboCop and syntax checks against code in this repository. This is the default Rake task.
 
 ```
 $ bundle exec rake lint
@@ -108,7 +108,7 @@ $ bundle exec rake test:integration
 
 ### Development
 
-Habitat CLI, the Habitat Supervisor, and a sample httpd/memcached application have been
+Habitat CLI, the Habitat supervisor, and a sample httpd/memcached application have been
 provided in a Vagrant VM. The sample application will be available on the host at port 7080. Habitat `http-gateway` and `ctl-gateway` are available on ports 7631 and 7632.
 
 ### Testing
