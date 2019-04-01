@@ -43,7 +43,7 @@ describe habitat_services.where { dependency_names.include?('core/gcc') } do
 end
 ```
 
-### Search for Services, then examine them in detail using `habitat_service`
+### Search for services, then examine them in detail using `habitat_service`
 
 ```ruby
 # Use the plural resource as a data lookup (not as a test)...
@@ -81,7 +81,7 @@ This resource does not accept resource parameters, which is typical for plural r
 
 ## Filter Criteria
 
-[Filter criteria](https://www.inspec.io/docs/reference/glossary/#filter-criteria) are used to select which services you wish to examine. If no filter criteria are used, all Services are selected.
+[Filter criteria](https://www.inspec.io/docs/reference/glossary/#filter-criteria) are used to select which services you wish to examine. If no filter criteria are used, all services are selected.
 
 ### dependency_names
 
@@ -231,7 +231,7 @@ This list is de-duplicated.
 describe habitat_services do
   its('origins') { should include 'core' }
   its('origins') { should include 'mycorp' }
-  # Advanced usage - count an Array-valued property
+  # Advanced usage - count an array-valued property
   its('origins', 'count') { should cmp 2 }
 end
 ```
