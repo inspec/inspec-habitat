@@ -33,7 +33,7 @@ If you use the CLI interface without the API, unavailable properties will behave
 If the service is not found, then this resource behaves as follows:
 
  * `it { should exist }` will be a failing test. Check this test if you are unsure if the resource will exist; it is guaranteed to be reliable in the future.
- * `name` and `origin` will continue to return their values as set in the resource parameters. This allows output messaging to refer to the missing Service clearly.
+ * `name` and `origin` will continue to return their values as set in the resource parameters. This allows output messaging to refer to the missing service clearly.
  * All other single-value properties will return nil.
  * All array and hash-valued properties will return empty objects.
  * All matchers will return false.
