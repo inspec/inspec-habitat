@@ -22,31 +22,66 @@ class HabitatService < Inspec.resource(1)
   end
 
   def version
-    service.dig('pkg', 'version') unless service.nil?
+    service&.dig(:pkg, :version)
   end
 
   def release
-    service.dig('pkg', 'release') unless service.nil?
+    service&.dig(:pkg, :release)
   end
 
+  # Undocumented. Use `have_*topology` instead
   def topology
-    service.dig('topology') unless service.nil?
+    service&.dig(:topology)
   end
 
+  def has_standalone_topology?
+    topology == 'standalone'
+  end
+
+  def has_leader_follower_topology?
+    topology == 'leader'
+  end
+
+  # Undocumented. Use `updated_by_*?` instead
   def update_strategy
-    service.dig('update_strategy') unless service.nil?
+    service&.dig(:update_strategy)
   end
 
-  def deps
-    service.dig('pkg', 'deps') unless service.nil?
+  def updated_by_none?
+    update_strategy == 'none'
+  end
+
+  def updated_by_rolling?
+    update_strategy == 'rolling'
+  end
+
+  def updated_at_once?
+    update_strategy == 'at-once'
+  end
+
+  # Undocumented. Use `dependency_names` or `dependency_ids` instead.
+  def dependencies
+    service&.dig(:pkg, :deps) || []
+  end
+
+  def dependency_names
+    dependencies.map { |d| "#{d[:origin]}/#{d[:name]}" }
+  end
+
+  def dependency_ids
+    dependencies.map { |d| "#{d[:origin]}/#{d[:name]}/#{d[:version]}/#{d[:release]}" }
   end
 
   def exists?
     !service.nil?
   end
 
+  def exist?
+    !service.nil?
+  end
+
   def pkg_id
-    service.dig('pkg', 'ident') unless service.nil?
+    service&.dig(:pkg, :ident)
   end
 
   def to_s
@@ -60,17 +95,42 @@ class HabitatService < Inspec.resource(1)
   end
 
   def service
-    return @services if defined?(@services)
+    return @service if defined?(@service)
 
-    services = inspec.backend.habitat_client.services.select { |svc|
-      svc['pkg']['origin'] == origin &&
-        svc['pkg']['name'] == name
-    }
-
-    if services.one?
-      @services = services[0]
+    # Prefer the API, it is much richer
+    if inspec.backend.api_options_provided?
+      services = inspec.backend.habitat_api_client.get_path('/services').body.select { |svc|
+        svc[:pkg][:origin] == origin &&
+          svc[:pkg][:name] == name
+      }
+      @service = services.one? ? services[0] : nil
     else
-      @services = nil
+
+      service_check_result = inspec.backend.run_hab_cli("svc status #{origin}/#{name}")
+      if service_check_result.exit_status == 1 && service_check_result.stderr.include?('Service not loaded')
+        # No such service
+        @service = nil
+      else
+        load_service_via_cli(service_check_result.stdout)
+      end
     end
+  end
+
+  def load_service_via_cli(status_stdout)
+    # package                           type        desired  state  elapsed (s)  pid   group
+    # core/httpd/2.4.35/20190307151146  standalone  up       up     158169       1410  httpd.default
+    @service = {}
+    line = status_stdout.split("\n")[1] # Skip header
+    fields = line.split(/\s+/)
+    @service[:pkg] = {}
+    @service[:pkg][:ident] = fields[0]
+    @service[:topology] = fields[1]
+    ident_fields = @service[:pkg][:ident].split('/')
+    @service[:pkg][:origin] = ident_fields[0]
+    @service[:pkg][:name] = ident_fields[1]
+    @service[:pkg][:version] = ident_fields[2]
+    @service[:pkg][:release] = ident_fields[3]
+    # update_strategies, dependencies are not available via CLI svc
+    @service
   end
 end
