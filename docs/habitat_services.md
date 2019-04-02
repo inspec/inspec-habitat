@@ -32,12 +32,12 @@ end
 ### Ensure gcc is not a dependency of any service
 
 ```ruby
-# One way - list all services, insist none have a dep on gcc
+# One way - list all services, insist none have a dependency on gcc
 describe habitat_services do
   its('dependency_names') { should_not include 'core/gcc' }
 end
 
-# Another way - list all services with a dep on gcc, insist there are none
+# Another way - list all services with a dependency on gcc, insist there are none
 describe habitat_services.where { dependency_names.include?('core/gcc') } do
   it { should_not exist }
 end
