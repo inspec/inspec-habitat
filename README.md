@@ -2,23 +2,10 @@
 
 [![Build Status](https://travis-ci.org/inspec/inspec-habitat.svg?branch=master)](https://travis-ci.org/inspec/inspec-habitat)
 
-TODO: Write project summary
-
 
 ## Prerequisites
 
-* Ruby
-* Bundler installed
-* Train-Habitat plugin installed
-
-### Installing Train Habitat
-
-Train Habitat is not available in Ruby Gems. For now you must have a local clone of https://github.com/inspec/train-habitat.git. To install the plugin:
-
-```
-$ inspec plugin install /path/to/train-habitat
-```
-
+* InSpec v3.9.0 or later
 
 ## Use the Resources
 
@@ -33,14 +20,13 @@ $ inspec init profile my-profile
 Example inspec.yml:
 ```
 name: my-profile
-title: My own Oneview profile
+title: My own Hab profile
 version: 0.1.0
-inspec_version: '>= 3.0.0'
+inspec_version: '>= 3.8.0'
 depends:
   - name: inspec-habitat
     url: https://github.com/inspec/inspec-habitat/archive/master.tar.gz
 ```
-
 
 ## Examples
 
@@ -56,7 +42,7 @@ end
 
 ## Resource Documentation
 
-TODO: List individual pages of resource documentation
+Resource documentation is located at the [main InSpec docs website](https://www.inspec.io/docs/reference/resources/#habitat-resources) as well as in the [source code docs directory](https://github.com/inspec/inspec-habitat/tree/master/docs/resources)
 
 
 ## Contributing
@@ -65,11 +51,16 @@ If you'd like to contribute to this project please see [Contributing
 Rules](CONTRIBUTING.md). The following instructions will help you get your
 development environment setup to run integration tests.
 
+### Prerequisites for All Testing
 
-### Getting Started
+  1. Ruby 2.3 or later
+  2. Bundler
+  3. Run `bundle install`.
 
-TODO: Write getting started
+### Prerequisites for Integration Testing
 
+  1. Vagrant
+  2. VirtualBox, or configure your Vagrant installation to use your favorite provider.
 
 ### Rake commands
 
@@ -78,57 +69,49 @@ TODO: Write getting started
 Runs the Ruby syntax checker against code in this repository.
 
 ```
-$ rake syntax
+$ bundle exec rake syntax
 ```
-
 
 #### Rubocop
 
 Runs Rubocop syntax checker against code in this repository.
 
 ```
-$ rake rubocop
+$ bundle exec rake rubocop
 ```
-
 
 #### Lint
 
 Runs Rubocop and syntax checks against code in this repository. This is the default Rake task.
 
 ```
-$ rake lint
+$ bundle exec rake lint
 ```
 
+#### Run Unit Tests
+
+Uses Minitest to test features of the code while simulating the responses of a Habitat installation.
+
+```
+$ bundle exec rake test:unit
+```
 
 #### Run Integration Tests
 
-Runs integration tests against a running test kitchen instance. You may optionally include a list of controls you wish to run.
-
-* You must run `kitchen converge` before running these tests.
-* You must have the train-habitat plugin installed.
+Runs integration tests against a running Habitat installation in a running Vagrant machine.
 
 ```
-$ kitchen converge
-
-$ rake test:integration
-
-$ rake test:integration[habitat_service]
+# To spin up the VM, run tests, and destroy the VM in one command
+$ bundle exec rake test:integration
+# See bundle exec rake -aT for other variations
 ```
 
 ### Development
 
-Habitat CLI, the Habitat Supervisor, and a sample nginx application have been
-provided in a kitchen VM. To start these run `kitchen converge`. The sample
-application will be available on the host at port 8080. Habitat `http-gateway`
-and `ctl-gateway` are available on ports 9631 and 9632.
-
-Running tests:
-```
-rake
-```
-
+Habitat CLI, the Habitat Supervisor, and a sample httpd/memcached application have been
+provided in a Vagrant VM. The sample application will be available on the host at port 7080. Habitat `http-gateway` and `ctl-gateway` are available on ports 7631 and 7632.
 
 ### Testing
 
-Tests are located in `test/integration/inspec-habitat` and may be run using
-`kitchen verify`.
+Tests are located in `test/integration/` and may be run using
+`rake test:integration`.
