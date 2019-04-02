@@ -14,6 +14,5 @@ group :development do
 end
 
 group :inspec do
-  gem 'inspec', '~> 3.0', '>= 3.0.9'
-  gem 'train-habitat', git: 'https://github.com/inspec/train-habitat.git'
+  gem 'inspec', '~> 3.9'
 end
