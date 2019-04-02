@@ -65,11 +65,11 @@ class HabitatService < Inspec.resource(1)
   end
 
   def dependency_names
-    dependencies.map { |d| "#{d[:origin]}/#{d[:name]}"}
+    dependencies.map { |d| "#{d[:origin]}/#{d[:name]}" }
   end
 
   def dependency_ids
-    dependencies.map { |d| "#{d[:origin]}/#{d[:name]}/#{d[:version]}/#{d[:release]}"}
+    dependencies.map { |d| "#{d[:origin]}/#{d[:name]}/#{d[:version]}/#{d[:release]}" }
   end
 
   def exists?
