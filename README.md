@@ -42,7 +42,7 @@ end
 
 ## Resource Documentation
 
-Resource documentation is located at the [main InSpec docs website](https://www.inspec.io/docs/reference/resources/#habitat-resources) as well as in the [source code docs directory](https://github.com/inspec/inspec-habitat/tree/cw/update-service/docs/resources)
+Resource documentation is located at the [main InSpec docs website](https://www.inspec.io/docs/reference/resources/#habitat-resources) as well as in the [source code docs directory](https://github.com/inspec/inspec-habitat/tree/master/docs/resources)
 
 
 ## Contributing
