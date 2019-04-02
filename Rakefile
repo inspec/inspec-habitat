@@ -69,4 +69,4 @@ end
 desc 'Linting tasks'
 task lint: [:rubocop, :syntax]
 
-task default: :lint
+task default: [:lint, :'test:unit']
