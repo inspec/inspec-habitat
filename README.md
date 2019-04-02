@@ -5,7 +5,7 @@
 
 ## Prerequisites
 
-* InSpec v3.8 or later TODO: determine version that includes train-habitat
+* InSpec v3.9.0 or later
 
 ## Use the Resources
 
