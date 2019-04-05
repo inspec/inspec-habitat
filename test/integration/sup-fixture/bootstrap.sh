@@ -39,11 +39,17 @@ systemctl start habitat
 systemctl enable habitat
 fi
 
-# Install at leaset two services
-echo "Installing core/httpd"
-hab pkg install core/httpd
-hab svc load core/httpd
+# Install and start two services
+echo "Installing and starting core/httpd"
+hab pkg install "core/httpd"
+hab svc load "core/httpd"
 
-echo "Installing core/memcached"
-hab pkg install core/memcached
-hab svc load core/memcached
+echo "Installing and starting core/memcached"
+hab pkg install "core/memcached"
+hab svc load "core/memcached"
+
+# Install at least two releases of the same version of a package
+hab pkg install core/libiconv/1.14/20161031044856
+hab pkg install core/libiconv/1.14/20180608141251
+
+# As a side effect of above, glibc got installed at v2.27 and v2.22
