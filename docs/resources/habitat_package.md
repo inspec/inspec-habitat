@@ -129,6 +129,38 @@ end
 
 Use [properties](https://www.inspec.io/docs/reference/glossary/#property) to create tests that compare an expected value to the actual value.
 
+### file_paths
+
+`Array` of `Strings`. A list of the filenames included in the package. The paths are relative.
+
+```ruby
+describe habitat_package(origin: 'core', name: 'httpd') do
+  its('file_paths') { should include 'bin/ab' }
+end
+```
+
+### dependency_ids
+
+`Array` of `Strings`. A list of the identifiers (including version and release) of the packages on which this package depends. This includes transitive dependencies.
+
+```ruby
+describe habitat_package(origin: 'core', name: 'httpd') do
+  its('dependency_ids') { should include 'core/openssl/1.0.2r/20190305210149' }
+  its('dependency_ids') { should_not include 'core/openssl/1.0.1/20190305210149' }
+end
+```
+
+### dependency_names
+
+`Array` of `Strings`. A list of the names (origin and name, no version or release) of the packages on which this package depends. This includes transitive dependencies.
+
+```ruby
+describe habitat_package(origin: 'core', name: 'httpd') do
+  its('dependency_names') { should include 'core/glibc' }
+  its('dependency_names') { should_not include 'core/gcc' }
+end
+```
+
 ### identifier
 
 String. The origin, name, version (if known) and release (if known) concatenated with `/`, to create the package identifier.
@@ -137,6 +169,7 @@ String. The origin, name, version (if known) and release (if known) concatenated
 describe habitat_package(origin: 'core', name: 'httpd') do
   its('identifier') { should eq 'core/httpd/2.4.35/20190307151146' }
 end
+```
 
 ### name
 
@@ -155,16 +188,6 @@ The origin name of the package, as passed in via the resource parameter. Always 
 ```ruby
 describe habitat_package(origin: 'core', name: 'httpd') do
   its('origin') { should cmp 'core' }
-end
-```
-
-### pkg_id
-
-String. The full package identifier of the package, in the form `origin/name/version/release`.  See also [name](#name) and [version](#version).
-
-```ruby
-describe habitat_package(origin: 'core', name: 'httpd') do
-  its('pkg_id') { should cmp 'core/httpd/2.4.35/20190307151146' }
 end
 ```
 
