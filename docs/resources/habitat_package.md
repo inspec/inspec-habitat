@@ -27,7 +27,7 @@ Habitat exposes certain data via the CLI, and other data via the HTTP Gateway AP
 
 This resource is **only** available using CLI credentials.
 
-If you use the API interface without the CLI, instances of this resource will behave as idf the sought-after package was not found.
+If you use the API interface without the CLI, instances of this resource will behave as if the sought-after package was not found.
 
 ### Behavior when not found
 
@@ -36,13 +36,13 @@ If the package is not found, then this resource behaves as follows:
  * `it { should exist }` will be a failing test. Check this test if you are unsure if the resource will exist; it is guaranteed to be reliable in the future.
  * `name`, `origin`, `version`, and `release` will continue to return their values as set in the resource parameters. This allows output messaging to refer to the missing package clearly.
  * `identifier` will return as much information as it can assemble from `name`, `origin`, `version`, and `release`.
- * All other single-value properties will return nil.
- * All array and hash-valued properties will return empty objects.
- * All matchers will return false.
+ * All other single-value properties will return `nil`.
+ * All array- and hash-valued properties will return empty objects.
+ * All matchers will return `false`.
 
 ### Behavior when multiple packages match
 
-Because a system can have multiple versions of the same named package installed (or even multiple releases of the same version of the same named package), if you under-specify the resource parameters, you may match multiple packages. Under those conditions, this resource will throw an `ArgumentError` exception, and the resource test will be recorded as a failure.
+A system can have multiple versions of the same-named package installed (or even multiple releases of the same version of the same named package). For this reason, if you under-specify the resource parameters, you may match with multiple packages. Under these conditions, this resource will throw an `ArgumentError` exception, and the resource test will be recorded as a failure.
 
 To avoid this possibility, fully specify the resource parameters, including `version` and `release`.
 
@@ -52,7 +52,7 @@ To list all installed versions and releases of a named package, use the plural r
 
 ### Installation
 
-This resource is in the `inspec-habitat` resource pack. You can use the resource by setting an InSpec profile dependency on the resource pack. See [inspec-habitat instructions](https://github.com/inspec/inspec-habitat#installation)
+This resource is in the `inspec-habitat` resource pack. You can use the resource by setting an InSpec profile dependency on this resource pack. See [inspec-habitat instructions](https://github.com/inspec/inspec-habitat#installation)
 
 ### Version
 
@@ -76,7 +76,7 @@ end
 
 ### Using individual identifier components as a `Hash`
 
-This approach can make it easier to write resource tests that use InSpec inputs ot Ruby variables.
+This approach can make it easier to write resource tests that use InSpec inputs or Ruby variables.
 
 #### origin
 
@@ -96,7 +96,7 @@ end
 
 #### name
 
-`String`. The name (unique within the namespace of the origin) of the package. This may match more than one package; see [Behavior when multiple packages match](#behavior-when-multiple-packages match).
+`String`. The name (unique within the namespace of the origin) of the package. This may match more than one package; see [Behavior when multiple packages match](#behavior-when-multiple-packages-match).
 
 ```ruby
 describe habitat_package(origin: 'core', name: 'httpd') do
@@ -117,7 +117,7 @@ end
 
 #### version
 
-`String`, typically of the form `1.2.3` but formats vary. The version of the package as determined by the author of the software. This may match more than one package, because multiple releases of the same version may be co-installed; see [Behavior when multiple packages match](#behavior-when-multiple-packages match).
+`String`, typically of the form `1.2.3` but formats vary. The version of the package as determined by the author of the software. This may match more than one package, because multiple releases of the same version may be co-installed; see [Behavior when multiple packages match](#behavior-when-multiple-packages-match).
 
 ```ruby
 describe habitat_package(origin: 'core', name: 'httpd', version: '2.3.5') do
@@ -131,7 +131,7 @@ Use [properties](https://www.inspec.io/docs/reference/glossary/#property) to cre
 
 ### identifier
 
-String. The origin, name, version (if known) and release (if known) concatenated with `/`, to create the package identifier.
+`String`. The origin, name, version (if known) and release (if known) concatenated with `/`, to create the package identifier.
 
 ```ruby
 describe habitat_package(origin: 'core', name: 'httpd') do
