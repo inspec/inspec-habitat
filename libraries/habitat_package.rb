@@ -50,6 +50,29 @@ class HabitatPackage < Inspec.resource(1)
     "Habitat Service #{identifier}"
   end
 
+  def specific_install_root
+    return nil unless exists?
+
+    pkgs_install_root + '/' + identifier
+  end
+
+  def pkgs_install_root
+    self.class.pkgs_install_root
+  end
+
+  def self.pkgs_install_root
+    return nil unless inspec.backend.cli_options_provided?
+    return @pkgs_root if @pkgs_root
+
+    # Strategy: we know core/hab is installed, and we know the package
+    # install path is embedded in its PATH env var.
+    hab_ident = inspec.backend.run_command('hab pkg list core/hab').stdout.split("\n").first
+    env_lines = inspec.backend.run_command('hab pkg env core/hab').stdout
+    # export PATH="/hab/pkgs/core/hab/0.78.0/20190313115951/bin"
+    path_line = env_lines.split("\n").detect { |l| l.include? 'PATH=' }
+    @pkgs_root = path_line.match(%r{="(.+)/#{hab_ident}.*"})[1]
+  end
+
   private
 
   def perform_existence_check

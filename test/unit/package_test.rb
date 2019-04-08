@@ -173,5 +173,32 @@ describe HabitatPackage do
       end
     end
   end
+
+  #==========================================================================#
+  #                      Properties & Matchers
+  #==========================================================================#
+  describe 'when testing properties and matchers' do
+    let(:fixture) do
+      {
+        cli: {
+          cmd: 'pkg list core/httpd',
+          stdout_file: 'pkg-list-single.cli.txt',
+          exit_status: 0,
+        },
+        aux_cli: [
+          { cmd: 'hab pkg list core/hab', stdout_file: 'pkg-list-hab.cli.txt' }, # Needed for determining install root
+          { cmd: 'hab pkg env core/hab', stdout_file: 'pkg-env-hab.cli.txt' }, # Needed for determining install root
+        ],
+      }
+    end
+    let(:pkg) { HabitatPackage.new(origin: 'core', name: 'httpd') }
+
+    #------------------- Install Root (undocumented) -----------------------#
+    it 'should determine the install root correctly' do
+      InspecHabitat::UnitTestHelper.mock_inspec_context_object(self, fixture)
+      pkg.pkgs_install_root.must_equal '/hab/pkgs'
+      pkg.specific_install_root.must_equal '/hab/pkgs/core/httpd/2.4.35/20190307151146'
+    end
+  end
 end
 # rubocop:enable Metrics/BlockLength
