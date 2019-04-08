@@ -45,7 +45,10 @@ module InspecHabitat
     #     path: '/services', # This registers the stub, so it will only respond to this path
     #     body_file: 'services-single.api.json', # A file under test/unit/fixtures, empty String if this key is absent
     #     code: 200
-    #   }
+    #   },
+    #   aux_cli: [ # If present, these commands are mocked as run_command (not run_hab_cli). Exit is always 0, no stderr.
+    #     { cmd: 'cat /etc/whatever', stdout_file: 'somefile.txt' }
+    #   ]
     # }
 
     # About this method.
@@ -57,47 +60,69 @@ module InspecHabitat
     # which means we need to be in an `it` block. So... and this is awful ...
     # pass the it block (which is `self`, within the it block) as the test
     # context and then perform a block-type instance-eval.
-    def mock_inspec_context_object(test_cxt, fixture) # rubocop:disable Metrics/AbcSize
+    def mock_inspec_context_object(test_cxt, fixture)
       test_cxt.instance_eval do
         inspec_cxt = mock
         hab_cxn = mock
 
         inspec_cxt.stubs(:backend).returns(hab_cxn)
 
-        if fixture.key?(:cli)
-          hab_cxn.stubs(:cli_options_provided?).returns(true)
-          run_result = mock
-          run_result.stubs(:exit_status).returns(fixture[:cli][:exit_status])
+        configure_cli_stubs(hab_cxn, fixture)
+        configure_api_stubs(hab_cxn, fixture)
+        configure_aux_cli_stubs(hab_cxn, fixture)
 
-          out = fixture[:cli][:stdout_file] ? File.read(File.join(unit_fixture_path, fixture[:cli][:stdout_file])) : ''
-          run_result.stubs(:stdout).returns(out)
-          err = fixture[:cli][:stderr_file] ? File.read(File.join(unit_fixture_path, fixture[:cli][:stderr_file])) : ''
-          run_result.stubs(:stderr).returns(err)
-
-          hab_cxn.stubs(:run_hab_cli).with(fixture[:cli][:cmd]).returns(run_result)
-        else
-          hab_cxn.stubs(:cli_options_provided?).returns(false)
-        end
-
-        if fixture.key?(:api)
-          hab_cxn.stubs(:api_options_provided?).returns(true)
-          htg = mock
-          hab_cxn.stubs(:habitat_api_client).returns(htg)
-          resp = mock
-          resp.stubs(:code).returns(fixture[:api][:code])
-          if fixture[:api][:body_file]
-            api_path = File.join(unit_fixture_path, fixture[:api][:body_file])
-            resp.stubs(:body).returns(JSON.parse(File.read(api_path), symbolize_names: true))
-          end
-          htg.stubs(:get_path).with(fixture[:api][:path]).returns(resp)
-        else
-          hab_cxn.stubs(:api_options_provided?).returns(false)
-        end
         Inspec::Plugins::Resource.any_instance.stubs(:inspec).returns(inspec_cxt)
-
+        Inspec::Plugins::Resource.stubs(:inspec).returns(inspec_cxt)
       end
     end
     module_function :mock_inspec_context_object # rubocop:disable Style/AccessModifierDeclarations
+
+    def configure_cli_stubs(hab_cxn, fixture) # rubocop:disable Metrics/AbcSize
+      if fixture.key?(:cli)
+        hab_cxn.stubs(:cli_options_provided?).returns(true)
+        run_result = mock
+        run_result.stubs(:exit_status).returns(fixture[:cli][:exit_status])
+
+        out = fixture[:cli][:stdout_file] ? File.read(File.join(unit_fixture_path, fixture[:cli][:stdout_file])) : ''
+        run_result.stubs(:stdout).returns(out)
+        err = fixture[:cli][:stderr_file] ? File.read(File.join(unit_fixture_path, fixture[:cli][:stderr_file])) : ''
+        run_result.stubs(:stderr).returns(err)
+
+        hab_cxn.stubs(:run_hab_cli).with(fixture[:cli][:cmd]).returns(run_result)
+      else
+        hab_cxn.stubs(:cli_options_provided?).returns(false)
+      end
+    end
+
+    def configure_api_stubs(hab_cxn, fixture)
+      if fixture.key?(:api)
+        hab_cxn.stubs(:api_options_provided?).returns(true)
+        htg = mock
+        hab_cxn.stubs(:habitat_api_client).returns(htg)
+        resp = mock
+        resp.stubs(:code).returns(fixture[:api][:code])
+        if fixture[:api][:body_file]
+          api_path = File.join(unit_fixture_path, fixture[:api][:body_file])
+          resp.stubs(:body).returns(JSON.parse(File.read(api_path), symbolize_names: true))
+        end
+        htg.stubs(:get_path).with(fixture[:api][:path]).returns(resp)
+      else
+        hab_cxn.stubs(:api_options_provided?).returns(false)
+      end
+    end
+
+    def configure_aux_cli_stubs(hab_cxn, fixture)
+      if fixture.key?(:aux_cli)
+        fixture[:aux_cli].each do |cmd_info|
+          run_result = mock
+          run_result.stubs(:exit_status).returns(0)
+          run_result.stubs(:stderr).returns('')
+          out = File.read(File.join(unit_fixture_path, cmd_info[:stdout_file]))
+          run_result.stubs(:stdout).returns(out)
+          hab_cxn.stubs(:run_command).with(cmd_info[:cmd]).returns(run_result)
+        end
+      end
+    end
   end
 end
 
