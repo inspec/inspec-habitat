@@ -52,17 +52,14 @@ class HabitatPackage < Inspec.resource(1)
 
   def specific_install_root
     return nil unless exists?
+    return nil unless inspec.backend.cli_options_provided?
 
     pkgs_install_root + '/' + identifier
   end
 
   def pkgs_install_root
-    self.class.pkgs_install_root
-  end
-
-  def self.pkgs_install_root
-    return nil unless inspec.backend.cli_options_provided?
     return @pkgs_root if @pkgs_root
+    return nil unless inspec.backend.cli_options_provided?
 
     # Strategy: we know core/hab is installed, and we know the package
     # install path is embedded in its PATH env var.

@@ -3,5 +3,6 @@ control 'habitat_package' do
     it                     { should exist }
     its('version')         { should cmp >= '2.3.45' }
     its('release')         { should cmp >= '20180608050617' }
+    its('pkgs_install_root') { should eq '/hab/pkgs' } # Undocumented
   end
 end
