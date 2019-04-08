@@ -52,7 +52,7 @@ If you use the resource without the CLI, the resource will always return zero ma
 
 ### Installation
 
-This resource is in the `inspec-habitat` resource pack. You can use the resource by setting an InSpec profile dependency on the resource pack. See [inspec-habitat instructions](https://github.com/inspec/inspec-habitat#installation).
+This resource is in the `inspec-habitat` resource pack. You can use this resource by setting an InSpec profile dependency on the resource pack. See [inspec-habitat instructions](https://github.com/inspec/inspec-habitat#installation).
 
 ### Version
 
@@ -114,7 +114,7 @@ end
 
 ## Properties
 
-Use [properties](https://www.inspec.io/docs/reference/glossary/#property) to create tests that compare an expected to value to the actual value.
+Use [properties](https://www.inspec.io/docs/reference/glossary/#property) to create tests that compare an expected value to the actual value.
 
 ### count
 
