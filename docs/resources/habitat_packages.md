@@ -46,7 +46,7 @@ end
 
 Habitat exposes certain data via the CLI, and other data via the HTTP Gateway API. This resource is not available via the API; you must provide CLI credentials to use the resource. See the [train-habitat](https://github.com/inspec/train-habitat) documentation for more details.
 
-If you use the resource without the CLI, the resource will always return zero matches.
+If you use this resource without the CLI, this resource will always return zero matches.
 
 ## Availability
 
@@ -81,12 +81,12 @@ end
 
 ### origin
 
-String. The name of the origin that created the package that backs the package under consideration.
+String. The name of the origin that created the package under consideration.
 
 ```ruby
 # Examine only packages released by Chef
-describe habitat_packages.where(origin: 'chef') do
-  its('topologies') { should_not include 'standalone' }
+describe habitat_packages.where(origin: 'bad-origin') do
+  it { should_not exist }
 end
 ```
 
@@ -97,17 +97,17 @@ String. A 14-digit timestamp, in the format `YYYYMMDDHHMmmSS`. The timestamp ref
 ```ruby
 # Examine packages older than Jan 1 2018
 describe habitat_packages.where { release < '20180101000000' } do
-  its('update_strategies' ) { should_not include 'none' }
+  it { should_not exist }
 end
 
 # Examine packages older than 1 year
 describe habitat_packages.where { Date.parse(release[0..7]) < Date.today - 365 } do
-  its('update_strategies' ) { should_not include 'none' }
+  it { should_not exist }
 end
 
 # Another way
 describe habitat_packages.where { release < (Date.today - 365).strftime('%Y%m%d000000') } do
-  its('update_strategies' ) { should_not include 'none' }
+  it { should_not exist }
 end
 
 ```
@@ -129,14 +129,14 @@ end
 
 ### habitat_package_params
 
-Hash. Returns a set of options that can be passed directly to `habitat_package` (singular) to load an individual package for in-depth analysis.
+`Array` of `Hash`es. Returns a list of a set of options that can be passed directly to `habitat_package` (singular) to load an individual package for in-depth analysis.
 
 ```ruby
 # Use the plural resource as a data lookup (not as a test)...
 habitat_packages.where { origin != 'core' }.habitat_package_params.each do |params|
   # ... then use the singular resource to do in-depth testing
   describe habitat_package(params) do
-    its('release') { should_not be_standalone }
+    its('release') { should_not be < '201904090000' }
   end
 end
 ```
@@ -155,7 +155,7 @@ end
 
 ### origins
 
-Array of strings. The names of the origins that created the packages that backs the packages that were matched.
+Array of strings. The names of the origins that created the packages that were matched.
 This list is de-duplicated.
 
 ```ruby
