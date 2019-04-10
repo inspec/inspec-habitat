@@ -155,7 +155,7 @@ end
 
 ### origins
 
-Array of strings. The names of the origins that created the packages that were matched.
+Array of strings. The names of the origins that created the matched packages.
 This list is de-duplicated.
 
 ```ruby
