@@ -137,10 +137,11 @@ Use [properties](https://www.inspec.io/docs/reference/glossary/#property) to cre
 describe habitat_package(origin: 'core', name: 'httpd') do
   its('identifier') { should eq 'core/httpd/2.4.35/20190307151146' }
 end
+```
 
 ### name
 
-The name of the package, as passed in via the resource parameter. Always available, even if the resource was not found. See also [origin](#origin) and [version](#version).
+`String`. The name of the package, as passed in via the resource parameter. Always available, even if the resource was not found. See also [origin](#origin) and [version](#version).
 
 ```ruby
 describe habitat_package(origin: 'core', name: 'httpd') do
@@ -150,7 +151,7 @@ end
 
 ### origin
 
-The origin name of the package, as passed in via the resource parameter. Always available, even if the resource was not found. See also [name](#name) and [version](#version).
+`String`. The origin name of the package, as passed in via the resource parameter. Always available, even if the resource was not found. See also [name](#name) and [version](#version).
 
 ```ruby
 describe habitat_package(origin: 'core', name: 'httpd') do
@@ -160,7 +161,7 @@ end
 
 ### pkg_id
 
-String. The full package identifier of the package, in the form `origin/name/version/release`.  See also [name](#name) and [version](#version).
+`String`. The full package identifier of the package, in the form `origin/name/version/release`.  See also [name](#name) and [version](#version).
 
 ```ruby
 describe habitat_package(origin: 'core', name: 'httpd') do
@@ -170,7 +171,7 @@ end
 
 ### release
 
-String. The release number of the package, as assigned by the packager. These values are always strings, but are 14-digit timestamps. See also [version](#version).
+`String`. The release number of the package, as assigned by the packager. These values are always strings, but are 14-digit timestamps. See also [version](#version).
 
 ```ruby
 describe habitat_package(origin: 'core', name: 'httpd') do
@@ -180,7 +181,7 @@ end
 
 ### version
 
-The version of the package, as assigned by the maintainer of the package project.  While many versions are of the 3-digit form, there is no set rule, and exceptions are common. See also [release](#release).
+`String`. The version of the package, as assigned by the maintainer of the package project.  While many versions are of the 3-digit form, there is no set rule, and exceptions are common. See also [release](#release).
 
 ```ruby
 describe habitat_package(origin: 'core', name: 'httpd') do
