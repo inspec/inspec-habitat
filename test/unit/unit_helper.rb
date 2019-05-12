@@ -36,6 +36,7 @@ module InspecHabitat
     # Pass a fixture Hash to this method as the second arg.
     # {
     #   cli: { # Optional. If present, connection will say that CLI mode is available.
+    #          # This may also be an array of such hashes.
     #     cmd: 'svc status core/httpd', # This registers the stub, so it will only respond to this command
     #     stdout_file: 'svc-status-single.cli.txt', # A file under test/unit/fixtures, empty String if this key is absent
     #     stderr_file: 'some-other-file.cli.txt', # A file under test/unit/fixtures, empty String if this key is absent
@@ -45,7 +46,10 @@ module InspecHabitat
     #     path: '/services', # This registers the stub, so it will only respond to this path
     #     body_file: 'services-single.api.json', # A file under test/unit/fixtures, empty String if this key is absent
     #     code: 200
-    #   }
+    #   },
+    #   general_cli: [ # Used for general run_command CLI calls.
+    #     { cmd: '', stdout_file: '' }, # As for cli: above
+    #   ],
     # }
 
     # About this method.
@@ -66,15 +70,19 @@ module InspecHabitat
 
         if fixture.key?(:cli)
           hab_cxn.stubs(:cli_options_provided?).returns(true)
-          run_result = mock
-          run_result.stubs(:exit_status).returns(fixture[:cli][:exit_status])
 
-          out = fixture[:cli][:stdout_file] ? File.read(File.join(unit_fixture_path, fixture[:cli][:stdout_file])) : ''
-          run_result.stubs(:stdout).returns(out)
-          err = fixture[:cli][:stderr_file] ? File.read(File.join(unit_fixture_path, fixture[:cli][:stderr_file])) : ''
-          run_result.stubs(:stderr).returns(err)
+          # Boost this to an Array if it isn't already
+          (fixture[:cli].kind_of?(Array) ? fixture[:cli] : [ fixture[:cli] ]).each do |cli_fixture|
+            run_result = mock
+            run_result.stubs(:exit_status).returns(cli_fixture[:exit_status] || 0)
 
-          hab_cxn.stubs(:run_hab_cli).with(fixture[:cli][:cmd]).returns(run_result)
+            out = cli_fixture[:stdout_file] ? File.read(File.join(unit_fixture_path, cli_fixture[:stdout_file])) : ''
+            run_result.stubs(:stdout).returns(out)
+            err = cli_fixture[:stderr_file] ? File.read(File.join(unit_fixture_path, cli_fixture[:stderr_file])) : ''
+            run_result.stubs(:stderr).returns(err)
+
+            hab_cxn.stubs(:run_hab_cli).with(cli_fixture[:cmd]).returns(run_result)
+          end
         else
           hab_cxn.stubs(:cli_options_provided?).returns(false)
         end
@@ -93,8 +101,23 @@ module InspecHabitat
         else
           hab_cxn.stubs(:api_options_provided?).returns(false)
         end
-        Inspec::Plugins::Resource.any_instance.stubs(:inspec).returns(inspec_cxt)
 
+        if fixture.key?(:general_cli)
+          fixture[:general_cli].each do |cli_fixture|
+            hab_cxn.stubs(:cli_options_provided?).returns(true)
+            run_result = mock
+            run_result.stubs(:exit_status).returns(cli_fixture[:exit_status] || 0)
+            out = cli_fixture[:stdout_file] ? File.read(File.join(unit_fixture_path, cli_fixture[:stdout_file])) : ''
+            run_result.stubs(:stdout).returns(out)
+            err = cli_fixture[:stderr_file] ? File.read(File.join(unit_fixture_path, cli_fixture[:stderr_file])) : ''
+            run_result.stubs(:stderr).returns(err)
+            hab_cxn.stubs(:run_hab_cli).with(cli_fixture[:cmd]).returns(run_result)
+          end
+        end
+
+        # Stub at both instance and class level
+        Inspec::Plugins::Resource.any_instance.stubs(:inspec).returns(inspec_cxt)
+        Inspec::Plugins::Resource.stubs(:inspec).returns(inspec_cxt)
       end
     end
     module_function :mock_inspec_context_object # rubocop:disable Style/AccessModifierDeclarations
