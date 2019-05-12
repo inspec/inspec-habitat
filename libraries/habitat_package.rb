@@ -47,7 +47,7 @@ class HabitatPackage < Inspec.resource(1)
   end
 
   def to_s
-    "Habitat Service #{identifier}"
+    "Habitat Package #{identifier}"
   end
 
   private
