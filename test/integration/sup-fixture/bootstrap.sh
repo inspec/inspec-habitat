@@ -39,6 +39,8 @@ systemctl start habitat
 systemctl enable habitat
 fi
 
+hab license accept
+
 # Install and start two services
 echo "Installing and starting core/httpd"
 hab pkg install "core/httpd"
