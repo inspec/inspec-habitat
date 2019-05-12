@@ -3,5 +3,6 @@ control 'habitat_package' do
     it                     { should exist }
     its('version')         { should cmp >= '2.3.45' }
     its('release')         { should cmp >= '20180608050617' }
+    its('installation_path') { should match %r(/hab/pkgs/core/httpd/\d+\.\d+\.\d+/\d{14}) }
   end
 end

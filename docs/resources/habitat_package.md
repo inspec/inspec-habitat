@@ -139,6 +139,16 @@ describe habitat_package(origin: 'core', name: 'httpd') do
 end
 ```
 
+### installation_path
+
+`String`. The absolute path to the directory under which the package is installed.
+
+```ruby
+describe habitat_package(origin: 'core', name: 'httpd') do
+  its('installation_path') { should begin_with '/opt' }
+end
+```
+
 ### name
 
 `String`. The name of the package, as passed in via the resource parameter. Always available, even if the resource was not found. See also [origin](#origin) and [version](#version).

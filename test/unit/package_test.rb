@@ -173,5 +173,26 @@ describe HabitatPackage do
       end
     end
   end
+
+  #==========================================================================#
+  #                             Properties
+  #==========================================================================#
+
+  describe 'properties' do
+    describe 'installation_path' do
+      it 'should be correct' do
+        fixture = {
+          cli: [
+            { cmd: 'pkg list core/hab',   stdout_file: 'pkg-list-hab.cli.txt', },
+            { cmd: regexp_matches(/pkg env core\/hab/),    stdout_file: 'pkg-env-hab.cli.txt',  },
+            { cmd: 'pkg list core/httpd', stdout_file: 'pkg-list-single.cli.txt',  },
+          ],
+        }
+        InspecHabitat::UnitTestHelper.mock_inspec_context_object(self, fixture)
+        pkg = HabitatPackage.new('core/httpd')
+        pkg.installation_path.must_equal('/hab/pkgs/core/httpd/2.4.35/20190307151146')
+      end
+    end
+  end
 end
 # rubocop:enable Metrics/BlockLength
