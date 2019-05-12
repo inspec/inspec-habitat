@@ -111,7 +111,7 @@ module InspecHabitat
             run_result.stubs(:stdout).returns(out)
             err = cli_fixture[:stderr_file] ? File.read(File.join(unit_fixture_path, cli_fixture[:stderr_file])) : ''
             run_result.stubs(:stderr).returns(err)
-            hab_cxn.stubs(:run_hab_cli).with(cli_fixture[:cmd]).returns(run_result)
+            hab_cxn.stubs(:run_command).with(cli_fixture[:cmd]).returns(run_result)
           end
         end
 

@@ -55,6 +55,20 @@ class HabitatPackage < Inspec.resource(1)
     "#{hab_install_root}/#{identifier}"
   end
 
+  # Read dependency package IDs from the TDEPs file
+  def dependency_ids
+    return [] unless exists?
+    return @dependency_ids if defined?(@dependency_ids)
+    tdeps = inspec.backend.run_command("cat #{installation_path}/TDEPS").stdout
+    @dependency_ids = tdeps.chomp.split("\n")
+  end
+
+  def dependency_names
+    return [] unless exists?
+    return @dependency_names if defined?(@dependency_names)
+    @dependency_names = dependency_ids.map { |id| id.split('/')[0,2].join('/') }
+  end
+
   private
 
   def hab_install_root

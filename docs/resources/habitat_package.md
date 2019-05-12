@@ -129,6 +129,26 @@ end
 
 Use [properties](https://www.inspec.io/docs/reference/glossary/#property) to create tests that compare an expected value to the actual value.
 
+### dependency_ids
+
+`Array` of `Strings`. Each entry is the full id (origin/name/version/release) of each dependency of the package. This includes transitive ("deep") dependencies. See also the [`dependency_names` property](#dependency_names).
+
+```ruby
+describe habitat_package('core/httpd') do
+  its('dependency_ids') { should_not include 'core/openssl/1.2.3/20190307151146' }
+end
+```
+
+### dependency_names
+
+`Array` of `Strings`. Each entry is the short name (origin/name) of each dependency of the package. This includes transitive ("deep") dependencies. See also the [`dependency_ids` property](#dependency_ids).
+
+```ruby
+describe habitat_package('core/httpd') do
+  its('dependency_names') { should_not include 'core/mod_lua' }
+end
+```
+
 ### identifier
 
 `String`. The origin, name, version (if known) and release (if known) concatenated with `/`, to create the package identifier.
