@@ -61,7 +61,10 @@ module InspecHabitat
     # which means we need to be in an `it` block. So... and this is awful ...
     # pass the it block (which is `self`, within the it block) as the test
     # context and then perform a block-type instance-eval.
-    def mock_inspec_context_object(test_cxt, fixture) # rubocop:disable Metrics/AbcSize
+
+    # Also, this is really bad, linting-wise; but I'm not sure how to refactor
+    # this much, in an instance eval....
+    def mock_inspec_context_object(test_cxt, fixture) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
       test_cxt.instance_eval do
         inspec_cxt = mock
         hab_cxn = mock
@@ -72,7 +75,7 @@ module InspecHabitat
           hab_cxn.stubs(:cli_options_provided?).returns(true)
 
           # Boost this to an Array if it isn't already
-          (fixture[:cli].kind_of?(Array) ? fixture[:cli] : [ fixture[:cli] ]).each do |cli_fixture|
+          (fixture[:cli].is_a?(Array) ? fixture[:cli] : [fixture[:cli]]).each do |cli_fixture|
             run_result = mock
             run_result.stubs(:exit_status).returns(cli_fixture[:exit_status] || 0)
 

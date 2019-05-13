@@ -52,6 +52,7 @@ class HabitatPackage < Inspec.resource(1)
 
   def installation_path
     return nil unless exists?
+
     "#{hab_install_root}/#{identifier}"
   end
 
@@ -59,6 +60,7 @@ class HabitatPackage < Inspec.resource(1)
   def dependency_ids
     return [] unless exists?
     return @dependency_ids if defined?(@dependency_ids)
+
     tdeps = inspec.backend.run_command("cat #{installation_path}/TDEPS").stdout
     @dependency_ids = tdeps.chomp.split("\n")
   end
@@ -66,7 +68,8 @@ class HabitatPackage < Inspec.resource(1)
   def dependency_names
     return [] unless exists?
     return @dependency_names if defined?(@dependency_names)
-    @dependency_names = dependency_ids.map { |id| id.split('/')[0,2].join('/') }
+
+    @dependency_names = dependency_ids.map { |id| id.split('/')[0, 2].join('/') }
   end
 
   private
@@ -88,9 +91,10 @@ class HabitatPackage < Inspec.resource(1)
     # Or set PATH="C:\hab\pkgs\core\hab\0.81.0\20190507225645\bin"
     match = path_line.match(%r{="(.+)[\\\/]#{hab_spec}})
     unless match
-      # TODO Inspec 3174 resource unable handling
+      # TODO: Inspec 3174 resource unable handling
       raise Inspec::Exceptions::ResourceFailed, 'Cannot determine habitat install root'
     end
+
     match[1]
   end
 

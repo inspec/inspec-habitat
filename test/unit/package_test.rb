@@ -183,9 +183,9 @@ describe HabitatPackage do
       it 'should be correct' do
         fixture = {
           cli: [
-            { cmd: 'pkg list core/hab',   stdout_file: 'pkg-list-hab.cli.txt', },
-            { cmd: regexp_matches(/pkg env core\/hab/),    stdout_file: 'pkg-env-hab.cli.txt',  },
-            { cmd: 'pkg list core/httpd', stdout_file: 'pkg-list-single.cli.txt',  },
+            { cmd: 'pkg list core/hab', stdout_file: 'pkg-list-hab.cli.txt' },
+            { cmd: regexp_matches(%r{pkg env core/hab}), stdout_file: 'pkg-env-hab.cli.txt' },
+            { cmd: 'pkg list core/httpd', stdout_file: 'pkg-list-single.cli.txt' },
           ],
         }
         InspecHabitat::UnitTestHelper.mock_inspec_context_object(self, fixture)
@@ -198,13 +198,13 @@ describe HabitatPackage do
       it 'should be correct' do
         fixture = {
           cli: [
-            { cmd: 'pkg list core/hab',   stdout_file: 'pkg-list-hab.cli.txt', },
-            { cmd: regexp_matches(/pkg env core\/hab/),    stdout_file: 'pkg-env-hab.cli.txt',  },
-            { cmd: 'pkg list core/httpd', stdout_file: 'pkg-list-single.cli.txt',  },
+            { cmd: 'pkg list core/hab',   stdout_file: 'pkg-list-hab.cli.txt' },
+            { cmd: regexp_matches(%r{pkg env core/hab}), stdout_file: 'pkg-env-hab.cli.txt' },
+            { cmd: 'pkg list core/httpd', stdout_file: 'pkg-list-single.cli.txt' },
           ],
           general_cli: [
-            { cmd: 'cat /hab/pkgs/core/httpd/2.4.35/20190307151146/TDEPS', stdout_file: 'cat-httpd-tdeps.cli.txt' }
-          ]
+            { cmd: 'cat /hab/pkgs/core/httpd/2.4.35/20190307151146/TDEPS', stdout_file: 'cat-httpd-tdeps.cli.txt' },
+          ],
         }
         InspecHabitat::UnitTestHelper.mock_inspec_context_object(self, fixture)
         pkg = HabitatPackage.new('core/httpd')
