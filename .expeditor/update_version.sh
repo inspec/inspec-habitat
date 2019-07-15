@@ -6,4 +6,4 @@
 
 set -evx
 
-sed -i -r "s/version: \".*\"/version: \"$(cat VERSION)\"/" inspec.yml
+sed -i -r "s/version\: .*/version\: $(cat VERSION)/" inspec.yml

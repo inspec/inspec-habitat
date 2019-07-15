@@ -1,8 +1,6 @@
 # Documentation available at https://expeditor.chef.io/docs/getting-started/
 ---
 
-product_key: inspec-habitat
-
 pipelines:
  - verify:
     description: Pull Request validation tests
@@ -17,7 +15,7 @@ github:
   - "Version: Bump Minor"
  version_tag_format: v{{version}}
  release_branch:
-  - master:
+  - master
  
 changelog:
  categories:
@@ -38,9 +36,3 @@ merge_actions:
      - "Changelog: Skip Update"
      - "Expeditor: Skip All"
 
-subscriptions:
- - workload: artifact_published:stable:inspec-habitat:{{version_constraint}}
-   actions:
-    - built_in:rollover_changelog
-    - built_in:create_github_release
-    - built_in:notify_chefio_slack_channels
