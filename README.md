@@ -11,7 +11,38 @@ For more information on project states and SLAs, see [this documentation](https:
 
 ## Prerequisites
 
-* InSpec v3.9.0 or later
+* InSpec v4.7.3 or later
+* A running Habitat Supervisor which you can access either via SSH, the HTTP API, or (ideally), both.
+
+### Configuring InSpec to Reach Habitat
+
+_Getting an `unsupported platform' error? This section will help!_
+
+`inspec-habitat` uses whatever method is available to query Habitat to obtain information, either from the the `hab` CLI command (via SSH) or the HTTP API gateway. Because of this dual nature, the number of possible connection options is large; it is recommended to place your connection options in a configuration file and then reference them by name. For example, if you place this JSON code in your `~/.inspec/config.json`:
+
+```json
+{
+  "file_version": "1.1",
+  "credentials": {
+    "habitat": {
+      "dev-hab": {
+        "api_url": "http://dev-hab.my-corp.io",
+        "cli_ssh_host": "dev-hab.my-corp.io"
+      }
+    }
+  }
+}
+```
+
+You can then execute the profile 'someprofile' using the command line:
+
+```
+you@yourhost $ inspec exec someprofile -t habitat://dev-hab
+```
+
+Notice that `dev-hab` is just the label for the set of configuration options. You may have as many sets of configuration options as you like.
+
+Properly speaking, these options are being fed to the support library, `train-habitat`. It supports many additional options, including authentication tokens for the API server and SSH options. Please see [Using train-habitat from Ruby](https://github.com/inspec/train-habitat#using-train-habitat-from-ruby) for further details.
 
 ## Use the Resources
 
