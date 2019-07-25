@@ -28,7 +28,7 @@ Example inspec.yml:
 name: my-profile
 title: My own Hab profile
 version: 0.1.0
-inspec_version: '>= 3.8.0'
+inspec_version: '>= 4.7.3'
 depends:
   - name: inspec-habitat
     url: https://github.com/inspec/inspec-habitat/archive/master.tar.gz
