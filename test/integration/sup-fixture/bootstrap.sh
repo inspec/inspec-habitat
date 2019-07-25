@@ -3,7 +3,7 @@
 # Install Habitat
 if [ ! -e "/bin/hab" ]; then
   curl https://raw.githubusercontent.com/habitat-sh/habitat/master/components/hab/install.sh | sudo bash
-
+  yes | hab --version
   hab pkg install core/hab-sup --binlink
 fi
 
