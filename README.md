@@ -1,6 +1,6 @@
 # InSpec Habitat Resource Pack
 
-* **Project State: Active**
+* **Project State: Active** (but EXPERIMENTAL)
 * **Issues Response SLA: 3 business days**
 * **Pull Request Response SLA: 3 business days**
 
@@ -8,6 +8,10 @@ For more information on project states and SLAs, see [this documentation](https:
 
 [![Build Status](https://travis-ci.org/inspec/inspec-habitat.svg?branch=master)](https://travis-ci.org/inspec/inspec-habitat)
 
+
+## Notice - Experimental Project
+
+This resource pack is in the early stages of research and development. Functionality may be defective, incomplete, or be withdrawn in the future. If you are interested in helping this project mature, please join the conversation or contribute code at the [inspec-habitat project](https://github.com/inspec/inspec-habitat).
 
 ## Prerequisites
 
