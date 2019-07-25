@@ -1,9 +1,14 @@
-<!-- latest_release 1.0.2 -->
+<!-- latest_release 1.0.3 -->
+## [v1.0.3](https://github.com/inspec/inspec-habitat/tree/v1.0.3) (2019-07-25)
+
+#### Merged Pull Requests
+- Update references from inspec 3 to inspec 4 [#42](https://github.com/inspec/inspec-habitat/pull/42) ([clintoncwolfe](https://github.com/clintoncwolfe))
+<!-- latest_release -->
+
 ## [v1.0.2](https://github.com/inspec/inspec-habitat/tree/v1.0.2) (2019-07-25)
 
 #### Merged Pull Requests
 - Accept license in integration test fixture [#41](https://github.com/inspec/inspec-habitat/pull/41) ([clintoncwolfe](https://github.com/clintoncwolfe))
-<!-- latest_release -->
 
 ## [v1.0.1](https://github.com/inspec/inspec-habitat/tree/v1.0.1) (2019-07-16)
 
