@@ -12,13 +12,29 @@ For more information on project states and SLAs, see [this documentation](https:
 ## Prerequisites
 
 * InSpec v4.7.3 or later
-* A running Habitat Supervisor which you can access either via SSH, the HTTP API, or (ideally), both.
+* A running Habitat Supervisor which you can access via SSH, the HTTP API, or (ideally) both.
 
 ### Configuring InSpec to Reach Habitat
 
 _Getting an `unsupported platform' error? This section will help!_
 
-`inspec-habitat` uses whatever method is available to query Habitat to obtain information, either from the the `hab` CLI command (via SSH) or the HTTP API gateway. Because of this dual nature, the number of possible connection options is large; it is recommended to place your connection options in a configuration file and then reference them by name. For example, if you place this JSON code in your `~/.inspec/config.json`:
+#### Using the `--target` option is required
+
+To connect to habitat, you _must_ use the `-t` option (`--target`) to specify that you are connecting to a `habitat://` type target. If you omit this, InSpec will attempt to connect to the local system, and the platform will not match.
+
+So, all of your invocations will look like this:
+
+```
+you@somehost $ inspec exec someprofile --target habitat://my-config
+```
+
+What does `my-config` refer to? [Keep reading!](#defining-a-configuration-section)
+
+#### Defining a configuration section
+
+`inspec-habitat` uses whatever available method to query Habitat to obtain information, either from the the `hab` CLI command (via SSH) or the HTTP API gateway. `inspec-habitat` uses the `hab` command line program to obtain certain information; currently it must use SSH to connect to the machine where `hab` is installed. Additionally, some information is only available via the Supervisor HTTP API.
+
+Because of this dual nature, the number of possible connection options is large. It is recommended to place your connection options in a configuration file and then reference them by name. For example, if you place this JSON code in your `~/.inspec/config.json`:
 
 ```json
 {
@@ -27,22 +43,39 @@ _Getting an `unsupported platform' error? This section will help!_
     "habitat": {
       "dev-hab": {
         "api_url": "http://dev-hab.my-corp.io",
-        "cli_ssh_host": "dev-hab.my-corp.io"
+        "cli_ssh_host": "dev-hab.my-corp.io",
+        "cli_ssh_user": "someuser",
+        "cli_ssh_key_files": "~/.ssh/KEYNAME"
       }
     }
   }
 }
 ```
 
-You can then execute the profile 'someprofile' using the command line:
+We'll dig into those options more [below](#connection-options-for-inspec-habitat). With that file established, you can then execute the profile 'someprofile' using the command line:
 
 ```
 you@yourhost $ inspec exec someprofile -t habitat://dev-hab
 ```
 
-Notice that `dev-hab` is just the label for the set of configuration options. You may have as many sets of configuration options as you like.
+Notice that `dev-hab` is just the label for the set of configuration options. Within the target `habitat://dev-hab`, the schema `habitat://` is required to select the train-habitat driver, and then the `dev-hab` label selects the matching set of options from the configuration file. You may have as many sets of configuration options as you like.
 
-Properly speaking, these options are being fed to the support library, `train-habitat`. It supports many additional options, including authentication tokens for the API server and SSH options. Please see [Using train-habitat from Ruby](https://github.com/inspec/train-habitat#using-train-habitat-from-ruby) for further details.
+#### Connection Options for inspec-habitat
+
+Here are the most commonly used options for inspec-habitat.
+
+This group deals with configuring access to the API server.
+
+ * `api_url` - URL to the supervisor API. If no port is specified, 9631 is assumed. If api_url is omitted, it is assumed the API is not available.
+ * `api_auth_token` - Bearer token for the supervisor API. If you configured your supervisor to expect a token, place it here.
+
+This group deals with configuring access to a host via SSH that has a hab binary that is local to the machine running the supervisor.
+
+ * `cli_ssh_host` - IP or hostname of the machine to connect to. If omitted, it is assumed that the CLI interface is not available.
+ * `cli_ssh_user` - Username to connect as. If omitted will use the OS user that the `inspec` process is running as.
+ * `cli_ssh_key_files` - Array or single string. Paths or path to key files to use when authenticating via SSH.
+
+Technically speaking, these options are being fed to the support library, `train-habitat`. It supports many additional options, especially for more obscure SSH options. Please see [Using train-habitat from Ruby](https://github.com/inspec/train-habitat#using-train-habitat-from-ruby) for further details.
 
 ## Use the Resources
 
