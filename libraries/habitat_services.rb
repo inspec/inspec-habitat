@@ -1,14 +1,14 @@
 require 'inspec/utils/filter'
 
 class HabitatServices < Inspec.resource(1)
-  name 'habitat_services'
-  desc 'Verifies multiple services'
+  name "habitat_services"
+  desc "Verifies multiple services"
   example "
     describe habitat_services.where { release <= '20180101000000' }  do
       it { should_not exist }
     end
   "
-  supports platform: 'habitat'
+  supports platform: "habitat"
 
   # Underlying FilterTable implementation.
   filter = FilterTable.create
@@ -43,7 +43,7 @@ class HabitatServices < Inspec.resource(1)
   end
 
   def fetch_data_by_api
-    raw_services = inspec.backend.habitat_api_client.get_path('/services').body
+    raw_services = inspec.backend.habitat_api_client.get_path("/services").body
     raw_services.map do |svc_entry|
       {
         name: svc_entry[:pkg][:name],
@@ -58,11 +58,11 @@ class HabitatServices < Inspec.resource(1)
   end
 
   def fetch_data_by_cli
-    lines = inspec.backend.run_hab_cli('svc status').stdout.split("\n")
+    lines = inspec.backend.run_hab_cli("svc status").stdout.split("\n")
     lines.shift # Ignore header line
     lines.map do |line|
       fields = line.split(/\s+/)
-      idents = fields.first.split('/')
+      idents = fields.first.split("/")
       {
         origin: idents[0],
         name: idents[1],

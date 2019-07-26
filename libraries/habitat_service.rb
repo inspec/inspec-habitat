@@ -1,6 +1,6 @@
 class HabitatService < Inspec.resource(1)
-  name 'habitat_service'
-  desc 'Verifies a Habitat Service'
+  name "habitat_service"
+  desc "Verifies a Habitat Service"
   example "
     describe habitat_service(origin: 'core', name: 'httpd') do
       it                     { should exist }
@@ -9,7 +9,7 @@ class HabitatService < Inspec.resource(1)
       its('update_strategy') { should eq 'none' }
     end
   "
-  supports platform: 'habitat'
+  supports platform: "habitat"
 
   attr_reader :origin, :name
 
@@ -35,11 +35,11 @@ class HabitatService < Inspec.resource(1)
   end
 
   def has_standalone_topology?
-    topology == 'standalone'
+    topology == "standalone"
   end
 
   def has_leader_follower_topology?
-    topology == 'leader'
+    topology == "leader"
   end
 
   # Undocumented. Use `updated_by_*?` instead
@@ -48,15 +48,15 @@ class HabitatService < Inspec.resource(1)
   end
 
   def updated_by_none?
-    update_strategy == 'none'
+    update_strategy == "none"
   end
 
   def updated_by_rolling?
-    update_strategy == 'rolling'
+    update_strategy == "rolling"
   end
 
   def updated_at_once?
-    update_strategy == 'at-once'
+    update_strategy == "at-once"
   end
 
   # Undocumented. Use `dependency_names` or `dependency_ids` instead.
@@ -99,7 +99,7 @@ class HabitatService < Inspec.resource(1)
 
     # Prefer the API, it is much richer
     if inspec.backend.api_options_provided?
-      services = inspec.backend.habitat_api_client.get_path('/services').body.select { |svc|
+      services = inspec.backend.habitat_api_client.get_path("/services").body.select { |svc|
         svc[:pkg][:origin] == origin &&
           svc[:pkg][:name] == name
       }
@@ -107,7 +107,7 @@ class HabitatService < Inspec.resource(1)
     else
 
       service_check_result = inspec.backend.run_hab_cli("svc status #{origin}/#{name}")
-      if service_check_result.exit_status == 1 && service_check_result.stderr.include?('Service not loaded')
+      if service_check_result.exit_status == 1 && service_check_result.stderr.include?("Service not loaded")
         # No such service
         @service = nil
       else
@@ -125,7 +125,7 @@ class HabitatService < Inspec.resource(1)
     @service[:pkg] = {}
     @service[:pkg][:ident] = fields[0]
     @service[:topology] = fields[1]
-    ident_fields = @service[:pkg][:ident].split('/')
+    ident_fields = @service[:pkg][:ident].split("/")
     @service[:pkg][:origin] = ident_fields[0]
     @service[:pkg][:name] = ident_fields[1]
     @service[:pkg][:version] = ident_fields[2]

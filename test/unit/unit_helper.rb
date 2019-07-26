@@ -1,11 +1,11 @@
-require 'minitest/autorun'
-require 'minitest/spec'
-require 'mocha/minitest'
+require "minitest/autorun"
+require "minitest/spec"
+require "mocha/minitest"
 
-require 'train-habitat'
+require "train-habitat"
 
-require 'byebug'
-require 'json'
+require "byebug"
+require "json"
 
 class Module
   include Minitest::Spec::DSL
@@ -18,7 +18,7 @@ end
 module InspecHabitat
   module UnitTestHelper
     def check_definition(opts)
-      it 'should meet the basic definition of a resource' do
+      it "should meet the basic definition of a resource" do
         klass = opts[:klass]
         meta = klass.metadata
 
@@ -26,7 +26,7 @@ module InspecHabitat
         meta.name.wont_be_empty
         meta.example.wont_be_empty
         meta.desc.wont_be_empty
-        meta.supports.must_equal({ platform: 'habitat' })
+        meta.supports.must_equal({ platform: "habitat" })
         klass.instance_methods.must_include(:exist?)
         klass.instance_methods.must_include(:exists?)
       end
@@ -69,9 +69,9 @@ module InspecHabitat
           run_result = mock
           run_result.stubs(:exit_status).returns(fixture[:cli][:exit_status])
 
-          out = fixture[:cli][:stdout_file] ? File.read(File.join(unit_fixture_path, fixture[:cli][:stdout_file])) : ''
+          out = fixture[:cli][:stdout_file] ? File.read(File.join(unit_fixture_path, fixture[:cli][:stdout_file])) : ""
           run_result.stubs(:stdout).returns(out)
-          err = fixture[:cli][:stderr_file] ? File.read(File.join(unit_fixture_path, fixture[:cli][:stderr_file])) : ''
+          err = fixture[:cli][:stderr_file] ? File.read(File.join(unit_fixture_path, fixture[:cli][:stderr_file])) : ""
           run_result.stubs(:stderr).returns(err)
 
           hab_cxn.stubs(:run_hab_cli).with(fixture[:cli][:cmd]).returns(run_result)

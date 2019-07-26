@@ -2,14 +2,14 @@ require 'inspec/utils/filter'
 require 'inspec/exceptions'
 
 class HabitatPackages < Inspec.resource(1)
-  name 'habitat_packages'
-  desc 'Verifies multiple installed packages'
+  name "habitat_packages"
+  desc "Verifies multiple installed packages"
   example "
     describe habitat_packages.where { release <= '20180101000000' }  do
       it { should_not exist }
     end
   "
-  supports platform: 'habitat'
+  supports platform: "habitat"
 
   # Underlying FilterTable implementation.
   filter = FilterTable.create
@@ -35,10 +35,10 @@ class HabitatPackages < Inspec.resource(1)
     # Only available by CLI
     return [] unless inspec.backend.cli_options_provided?
 
-    lines = inspec.backend.run_hab_cli('pkg list --all').stdout.split("\n")
+    lines = inspec.backend.run_hab_cli("pkg list --all").stdout.split("\n")
     lines.map do |line|
       ident = {}
-      ident[:origin], ident[:name], ident[:version], ident[:release] = line.split('/')
+      ident[:origin], ident[:name], ident[:version], ident[:release] = line.split("/")
       ident
     end
   end
