@@ -3,6 +3,7 @@
 require 'bundler'
 require 'bundler/gem_helper'
 require 'rake/testtask'
+require "chefstyle"
 require 'rubocop/rake_task'
 require 'open3'
 
