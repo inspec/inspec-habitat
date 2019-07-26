@@ -9,6 +9,17 @@ Use the `habitat_package` (singular) InSpec audit resource to perform in-depth a
 
 Use the `habitat_packages` (plural) InSpec audit resource to list Habitat packages, and perform bulk operations.
 
+## Availability
+
+### Status: EXPERIMENTAL
+
+This resource, like all of the inspec-habitat resource pack, is in the early stages of research and development. Functionality may be defective, incomplete, or be withdrawn in the future. If you are interested in helping this project mature, please join the conversation or contribute code at the [inspec-habitat project](https://github.com/inspec/inspec-habitat).
+
+### Connecting to Habitat
+
+To configure `inspec` to be able to communicate with Chef Habitat, be sure [to follow the instructions](https://github.com/inspec/inspec-habitat#configuring-inspec-to-reach-habitat) regarding configuring the connection options. This will prevent 'unsupported platform' errors.
+
+
 ## Examples
 
 ### Ensure httpd and memcached are installed
