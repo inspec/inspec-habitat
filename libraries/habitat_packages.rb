@@ -1,4 +1,4 @@
-require 'utils/filter'
+require 'inspec/utils/filter'
 require 'inspec/exceptions'
 
 class HabitatPackages < Inspec.resource(1)

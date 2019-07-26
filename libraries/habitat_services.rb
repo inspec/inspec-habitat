@@ -1,4 +1,4 @@
-require 'utils/filter'
+require 'inspec/utils/filter'
 
 class HabitatServices < Inspec.resource(1)
   name 'habitat_services'
