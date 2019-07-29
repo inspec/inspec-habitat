@@ -1,9 +1,14 @@
-<!-- latest_release 1.0.4 -->
+<!-- latest_release 1.0.5 -->
+## [v1.0.5](https://github.com/inspec/inspec-habitat/tree/v1.0.5) (2019-07-29)
+
+#### Merged Pull Requests
+- Apply chefstyle to inspec-habitat [#44](https://github.com/inspec/inspec-habitat/pull/44) ([clintoncwolfe](https://github.com/clintoncwolfe))
+<!-- latest_release -->
+
 ## [v1.0.4](https://github.com/inspec/inspec-habitat/tree/v1.0.4) (2019-07-26)
 
 #### Merged Pull Requests
 - Update require location of filtertable for requires in plural resources [#43](https://github.com/inspec/inspec-habitat/pull/43) ([clintoncwolfe](https://github.com/clintoncwolfe))
-<!-- latest_release -->
 
 ## [v1.0.3](https://github.com/inspec/inspec-habitat/tree/v1.0.3) (2019-07-25)
 
