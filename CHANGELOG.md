@@ -1,9 +1,14 @@
-<!-- latest_release 1.0.5 -->
+<!-- latest_release 1.0.6 -->
+## [v1.0.6](https://github.com/inspec/inspec-habitat/tree/v1.0.6) (2019-07-29)
+
+#### Merged Pull Requests
+- Remove ruby 2.3, add ruby 2.6, loosen 2.4 [#45](https://github.com/inspec/inspec-habitat/pull/45) ([clintoncwolfe](https://github.com/clintoncwolfe))
+<!-- latest_release -->
+
 ## [v1.0.5](https://github.com/inspec/inspec-habitat/tree/v1.0.5) (2019-07-29)
 
 #### Merged Pull Requests
 - Apply chefstyle to inspec-habitat [#44](https://github.com/inspec/inspec-habitat/pull/44) ([clintoncwolfe](https://github.com/clintoncwolfe))
-<!-- latest_release -->
 
 ## [v1.0.4](https://github.com/inspec/inspec-habitat/tree/v1.0.4) (2019-07-26)
 
