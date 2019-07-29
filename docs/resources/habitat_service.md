@@ -7,6 +7,16 @@ platform: habitat
 
 Use the `habitat_service` InSpec audit resource to test properties of a single Habitat service.
 
+## Availability
+
+### Status: EXPERIMENTAL
+
+This resource, like all of the inspec-habitat resource pack, is in the early stages of research and development. Functionality may be defective, incomplete, or be withdrawn in the future. If you are interested in helping this project mature, please join the conversation or contribute code at the [inspec-habitat project](https://github.com/inspec/inspec-habitat).
+
+### Connecting to Habitat
+
+To configure `inspec` to be able to communicate with Chef Habitat, be sure [to follow the instructions](https://github.com/inspec/inspec-habitat#configuring-inspec-to-reach-habitat) regarding configuring the connection options. This will prevent 'unsupported platform' errors.
+
 ## Examples
 
 ### Check for core/httpd service
