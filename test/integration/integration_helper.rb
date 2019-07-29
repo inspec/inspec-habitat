@@ -1,12 +1,12 @@
-require 'minitest/autorun'
-require 'minitest/spec'
+require "minitest/autorun"
+require "minitest/spec"
 
-require 'train'
+require "train"
 
-require 'byebug'
-require 'json'
-require 'tmpdir'
-require 'forwardable'
+require "byebug"
+require "json"
+require "tmpdir"
+require "forwardable"
 
 class Module
   include Minitest::Spec::DSL
@@ -35,13 +35,13 @@ module InspecHabitat
       # Strategy: assemble an array of tests that failed or skipped, and insist it is empty
       # result.payload.json['profiles'][0]['controls'][0]['results'][0]['status']
       failed_tests = []
-      payload.json['profiles'].each do |profile_struct|
-        profile_name = profile_struct['name']
-        profile_struct['controls'].each do |control_struct|
-          control_name = control_struct['id']
-          control_struct['results'].compact.each do |test_struct|
-            test_desc = test_struct['code_desc']
-            if test_struct['status'] != 'passed'
+      payload.json["profiles"].each do |profile_struct|
+        profile_name = profile_struct["name"]
+        profile_struct["controls"].each do |control_struct|
+          control_name = control_struct["id"]
+          control_struct["results"].compact.each do |test_struct|
+            test_desc = test_struct["code_desc"]
+            if test_struct["status"] != "passed"
               failed_tests << "#{profile_name}/#{control_name}/#{test_desc}"
             end
           end
@@ -53,19 +53,19 @@ module InspecHabitat
   end
 
   module IntegrationTestHelpers
-    let(:pack_repo_path) { File.expand_path(File.join(__FILE__, '..', '..', '..')) }
-    let(:int_test_path) { File.join(pack_repo_path, 'test', 'integration') }
-    let(:inspec_exec) { 'bundle exec inspec exec ' }
+    let(:pack_repo_path) { File.expand_path(File.join(__FILE__, "..", "..", "..")) }
+    let(:int_test_path) { File.join(pack_repo_path, "test", "integration") }
+    let(:inspec_exec) { "bundle exec inspec exec " }
 
-    LOCAL_TRAIN_CONNECTION = Train.create('local', command_runner: :generic).connection
+    LOCAL_TRAIN_CONNECTION = Train.create("local", command_runner: :generic).connection
 
     def run_inspec_againt_hab(profile_name, _opts = {})
       invocation = inspec_exec
-      invocation += ' ' + File.join(int_test_path, profile_name) + ' '
-      invocation += ' -t habitat://int_test '
-      invocation += ' --no-create-lockfile '
-      invocation += ' --config ' + File.join(int_test_path, 'config.json')
-      invocation += ' --reporter json '
+      invocation += " " + File.join(int_test_path, profile_name) + " "
+      invocation += " -t habitat://int_test "
+      invocation += " --no-create-lockfile "
+      invocation += " --config " + File.join(int_test_path, "config.json")
+      invocation += " --reporter json "
 
       result = IntTestRunResult.new(LOCAL_TRAIN_CONNECTION.run_command(invocation))
       result.payload.invocation = invocation

@@ -1,6 +1,6 @@
 class HabitatPackage < Inspec.resource(1)
-  name 'habitat_package'
-  desc 'Verifies an installed Habitat package'
+  name "habitat_package"
+  desc "Verifies an installed Habitat package"
   example "
     describe habitat_package(origin: 'core', name: 'httpd') do
       it                     { should exist }
@@ -9,13 +9,13 @@ class HabitatPackage < Inspec.resource(1)
       its('identifier')      { should eq 'core/httpd/2.4.35/20190307151146' }
     end
   "
-  supports platform: 'habitat'
+  supports platform: "habitat"
 
   attr_reader :name, :origin, :release, :version
 
   def initialize(params)
     if params.is_a? String
-      @origin, @name, @version, @release = params.split('/')
+      @origin, @name, @version, @release = params.split("/")
     elsif params.is_a? Hash
       @origin = params[:origin]
       @name   = params[:name]
@@ -65,10 +65,10 @@ class HabitatPackage < Inspec.resource(1)
     end
 
     if package_idents.count > 1
-      raise ArgumentError, 'Multiple package versions/releases matched - use more specific parameters, or use habitat_packages to enumerate multiple installed packages.'
+      raise ArgumentError, "Multiple package versions/releases matched - use more specific parameters, or use habitat_packages to enumerate multiple installed packages."
     end
 
-    @origin, @name, @version, @release = package_idents.first.split('/')
+    @origin, @name, @version, @release = package_idents.first.split("/")
     @exists = true
   end
 end
