@@ -1,9 +1,16 @@
----
-title: About the habitat_services Resource
-platform: habitat
----
++++
+title = "habitat_services resource"
+draft = false
+platform = "habitat"
 
-# habitat_services
+[menu]
+  [menu.inspec]
+    title = "habitat_services"
+    identifier = "inspec/resources/habitat/habitat_services.md habitat_services resource"
+    parent = "inspec/resources/habitat"
++++
+
+[\[edit on GitHub\]](https://github.com/inspec/inspec-habitat/blob/master/docs/resources/habitat_services.md)
 
 Use the `habitat_service` (singular) InSpec audit resource to perform in-depth auditing of a single service.
 
@@ -85,13 +92,13 @@ This resource was first available in version 0.1.0 of the resource pack.
 
 ## Resource Parameters
 
-[Resource parameters](https://www.inspec.io/docs/reference/glossary/#resource-parameter) are arguments passed to the resource in the control code.
+[Resource parameters](/inspec/glossary/#resource-parameter) are arguments passed to the resource in the control code.
 
 This resource does not accept resource parameters, which is typical for plural resources.
 
 ## Filter Criteria
 
-[Filter criteria](https://www.inspec.io/docs/reference/glossary/#filter-criteria) are used to select which services you wish to examine. If no filter criteria are used, all services are selected.
+[Filter criteria](/inspec/glossary/#filter-criteria) are used to select which services you wish to examine. If no filter criteria are used, all services are selected.
 
 ### dependency_names
 
@@ -175,7 +182,7 @@ end
 
 ## Properties
 
-Use [properties](https://www.inspec.io/docs/reference/glossary/#property) to create tests that compare an expected to value to the actual value.
+Use [properties](/inspec/glossary/#property) to create tests that compare an expected to value to the actual value.
 
 ### count
 
@@ -282,8 +289,8 @@ end
 
 ## Matchers
 
-Use [matchers](https://www.inspec.io/docs/reference/glossary/#matcher) to create tests that test a true or false question.
+Use [matchers](/inspec/glossary/#matcher) to create tests that test a true or false question.
 
-InSpec includes a number of [universal matchers](https://www.inspec.io/docs/reference/matchers/).
+InSpec includes a number of [universal matchers](/inspec/matchers/).
 
 This resource does not define any resource-specific matchers.
