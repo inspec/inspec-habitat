@@ -14,7 +14,7 @@ group :development do
   gem "minitest", "~> 5.11"
   gem "mocha", "~> 1.8"
   gem "pry", "~> 0.13.1"
-  gem "rake", "~> 12.3", ">= 12.3.1"
+  gem "rake", "~> 13.0"
   gem "chefstyle", "1.5.9"
 end
 
