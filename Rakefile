@@ -38,7 +38,7 @@ namespace(:test) do
   end
 
   desc "integration tests"
-  task integration: %i(integration:sup_start integration:integration_actual integration:sup_shutdown)
+  task integration: %i{integration:sup_start integration:integration_actual integration:sup_shutdown}
   Rake::TestTask.new(:integration_actual) do |t|
     t.libs.concat %w{test/integration}
     t.test_files = FileList[
@@ -68,6 +68,6 @@ namespace(:test) do
 end
 
 desc "Linting tasks"
-task lint: [:rubocop, :syntax]
+task lint: %i{rubocop syntax}
 
-task default: [:lint, :'test:unit']
+task default: %i{lint test:unit}
