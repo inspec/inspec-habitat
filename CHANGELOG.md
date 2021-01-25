@@ -1,9 +1,14 @@
-<!-- latest_release 1.0.7 -->
+<!-- latest_release 1.0.8 -->
+## [v1.0.8](https://github.com/inspec/inspec-habitat/tree/v1.0.8) (2021-01-25)
+
+#### Merged Pull Requests
+- Add Ruby 3.0 CI testing, drop EOL 2.4, update chefstyle [#52](https://github.com/inspec/inspec-habitat/pull/52) ([clintoncwolfe](https://github.com/clintoncwolfe))
+<!-- latest_release -->
+
 ## [v1.0.7](https://github.com/inspec/inspec-habitat/tree/v1.0.7) (2019-07-29)
 
 #### Merged Pull Requests
 - Add docs re: connection details and &#39;Experimental&#39; warning [#39](https://github.com/inspec/inspec-habitat/pull/39) ([clintoncwolfe](https://github.com/clintoncwolfe))
-<!-- latest_release -->
 
 ## [v1.0.6](https://github.com/inspec/inspec-habitat/tree/v1.0.6) (2019-07-29)
 
