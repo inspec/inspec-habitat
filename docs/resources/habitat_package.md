@@ -1,9 +1,16 @@
----
-title: About the habitat_package Resource
-platform: habitat
----
++++
+title = "habitat_package resource"
+draft = false
+platform = "habitat"
 
-# habitat_package
+[menu]
+  [menu.inspec]
+    title = "habitat_package"
+    identifier = "inspec/resources/habitat/habitat_package.md habitat_package resource"
+    parent = "inspec/resources/habitat"
++++
+
+[\[edit on GitHub\]](https://github.com/inspec/inspec-habitat/blob/master/docs/resources/habitat_package.md)
 
 Use the `habitat_package` InSpec audit resource to test properties of a single Habitat package.
 
@@ -43,12 +50,12 @@ If you use the API interface without the CLI, instances of this resource will be
 
 If the package is not found, then this resource behaves as follows:
 
- * `it { should exist }` will be a failing test. Check this test if you are unsure if the resource will exist; it is guaranteed to be reliable in the future.
- * `name`, `origin`, `version`, and `release` will continue to return their values as set in the resource parameters. This allows output messaging to refer to the missing package clearly.
- * `identifier` will return as much information as it can assemble from `name`, `origin`, `version`, and `release`.
- * All other single-value properties will return `nil`.
- * All array- and hash-valued properties will return empty objects.
- * All matchers will return `false`.
+- `it { should exist }` will be a failing test. Check this test if you are unsure if the resource will exist; it is guaranteed to be reliable in the future.
+- `name`, `origin`, `version`, and `release` will continue to return their values as set in the resource parameters. This allows output messaging to refer to the missing package clearly.
+- `identifier` will return as much information as it can assemble from `name`, `origin`, `version`, and `release`.
+- All other single-value properties will return `nil`.
+- All array- and hash-valued properties will return empty objects.
+- All matchers will return `false`.
 
 ### Behavior when multiple packages match
 
@@ -70,7 +77,7 @@ This resource was first available in version 0.1.0 of the resource pack.
 
 ## Resource Parameters
 
-Use [resource parameters](https://www.inspec.io/docs/reference/glossary/#resource-parameter) to identify the particular package you wish to test.
+Use [resource parameters](/inspec/glossary/#resource-parameter) to identify the particular package you wish to test.
 
 `habitat_package` can accept a single resource parameter, a `String` package identifier; or it can accept a `Hash` of identifier components.
 
@@ -118,7 +125,6 @@ end
 
 `String`, a 14-digit timestamp of the form 'YYYMMDDHHmmSS'. The release number of the package as determined by the packager of the software. If you provide this, you must also provide the version; with all four components, the match is guarenteed to be unique.
 
-
 ```ruby
 describe habitat_package(origin: 'core', name: 'httpd', version: '2.3.5', release: '20190307151146') do
   it { should exist }
@@ -137,7 +143,7 @@ end
 
 ## Properties
 
-Use [properties](https://www.inspec.io/docs/reference/glossary/#property) to create tests that compare an expected value to the actual value.
+Use [properties](/inspec/glossary/#property) to create tests that compare an expected value to the actual value.
 
 ### identifier
 
@@ -171,7 +177,7 @@ end
 
 ### pkg_id
 
-`String`. The full package identifier of the package, in the form `origin/name/version/release`.  See also [name](#name) and [version](#version).
+`String`. The full package identifier of the package, in the form `origin/name/version/release`. See also [name](#name) and [version](#version).
 
 ```ruby
 describe habitat_package(origin: 'core', name: 'httpd') do
@@ -191,7 +197,7 @@ end
 
 ### version
 
-`String`. The version of the package, as assigned by the maintainer of the package project.  While many versions are of the 3-digit form, there is no set rule, and exceptions are common. See also [release](#release).
+`String`. The version of the package, as assigned by the maintainer of the package project. While many versions are of the 3-digit form, there is no set rule, and exceptions are common. See also [release](#release).
 
 ```ruby
 describe habitat_package(origin: 'core', name: 'httpd') do
@@ -201,8 +207,8 @@ end
 
 ## Matchers
 
-Use [matchers](https://www.inspec.io/docs/reference/glossary/#matcher) to create tests that test a true or false question.
+Use [matchers](/inspec/glossary/#matcher) to create tests that test a true or false question.
 
-InSpec includes a number of [universal matchers](https://www.inspec.io/docs/reference/matchers/). See below for matchers specific to this resource.
+InSpec includes a number of [universal matchers](/inspec/matchers/). See below for matchers specific to this resource.
 
 This resource does not provide any resource-specific matchers.
