@@ -1,9 +1,14 @@
-<!-- latest_release 1.0.8 -->
+<!-- latest_release 1.0.9 -->
+## [v1.0.9](https://github.com/inspec/inspec-habitat/tree/v1.0.9) (2021-01-25)
+
+#### Merged Pull Requests
+- Update pry requirement from ~&gt; 0.11.3 to ~&gt; 0.13.1 [#49](https://github.com/inspec/inspec-habitat/pull/49) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot]))
+<!-- latest_release -->
+
 ## [v1.0.8](https://github.com/inspec/inspec-habitat/tree/v1.0.8) (2021-01-25)
 
 #### Merged Pull Requests
 - Add Ruby 3.0 CI testing, drop EOL 2.4, update chefstyle [#52](https://github.com/inspec/inspec-habitat/pull/52) ([clintoncwolfe](https://github.com/clintoncwolfe))
-<!-- latest_release -->
 
 ## [v1.0.7](https://github.com/inspec/inspec-habitat/tree/v1.0.7) (2019-07-29)
 
