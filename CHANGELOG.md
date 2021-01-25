@@ -1,9 +1,14 @@
-<!-- latest_release 1.0.10 -->
+<!-- latest_release 1.0.11 -->
+## [v1.0.11](https://github.com/inspec/inspec-habitat/tree/v1.0.11) (2021-01-25)
+
+#### Merged Pull Requests
+- migrate inspec resources docs from inspec/inspec repo [#48](https://github.com/inspec/inspec-habitat/pull/48) ([IanMadd](https://github.com/IanMadd))
+<!-- latest_release -->
+
 ## [v1.0.10](https://github.com/inspec/inspec-habitat/tree/v1.0.10) (2021-01-25)
 
 #### Merged Pull Requests
 - Update rake requirement from ~&gt; 12.3, &gt;= 12.3.1 to ~&gt; 13.0 [#50](https://github.com/inspec/inspec-habitat/pull/50) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot]))
-<!-- latest_release -->
 
 ## [v1.0.9](https://github.com/inspec/inspec-habitat/tree/v1.0.9) (2021-01-25)
 
