@@ -1,9 +1,14 @@
-<!-- latest_release 1.0.13 -->
+<!-- latest_release 1.0.14 -->
+## [v1.0.14](https://github.com/inspec/inspec-habitat/tree/v1.0.14) (2021-02-16)
+
+#### Merged Pull Requests
+- Update chefstyle requirement from 1.6.2 to 1.7.1 [#57](https://github.com/inspec/inspec-habitat/pull/57) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot]))
+<!-- latest_release -->
+
 ## [v1.0.13](https://github.com/inspec/inspec-habitat/tree/v1.0.13) (2021-02-02)
 
 #### Merged Pull Requests
 - Update chefstyle requirement from 1.6.1 to 1.6.2 [#55](https://github.com/inspec/inspec-habitat/pull/55) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot]))
-<!-- latest_release -->
 
 ## [v1.0.12](https://github.com/inspec/inspec-habitat/tree/v1.0.12) (2021-01-29)
 
