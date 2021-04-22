@@ -1,9 +1,14 @@
-<!-- latest_release 1.0.17 -->
+<!-- latest_release 1.0.18 -->
+## [v1.0.18](https://github.com/inspec/inspec-habitat/tree/v1.0.18) (2021-04-22)
+
+#### Merged Pull Requests
+- Update chefstyle requirement from 1.7.4 to 1.7.5 [#61](https://github.com/inspec/inspec-habitat/pull/61) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot]))
+<!-- latest_release -->
+
 ## [v1.0.17](https://github.com/inspec/inspec-habitat/tree/v1.0.17) (2021-03-26)
 
 #### Merged Pull Requests
 - Update pry requirement from ~&gt; 0.13.1 to ~&gt; 0.14.0 [#56](https://github.com/inspec/inspec-habitat/pull/56) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot]))
-<!-- latest_release -->
 
 ## [v1.0.16](https://github.com/inspec/inspec-habitat/tree/v1.0.16) (2021-03-26)
 
