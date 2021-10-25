@@ -15,7 +15,7 @@ group :development do
   gem "mocha", "~> 1.8"
   gem "pry", "~> 0.14.0"
   gem "rake", "~> 13.0"
-  gem "chefstyle", "2.0.9"
+  gem "chefstyle", "2.1.1"
 end
 
 group :inspec do
