@@ -2,46 +2,34 @@
 title = "habitat_service resource"
 draft = false
 platform = "habitat"
+gh_repo="inspec-habitat"
 
 [menu]
   [menu.inspec]
     title = "habitat_service"
-    identifier = "inspec/resources/habitat/habitat_service.md habitat_service resource"
+    identifier = "inspec/resources/habitat/habitat_service resource"
     parent = "inspec/resources/habitat"
 +++
 
-[\[edit on GitHub\]](https://github.com/inspec/inspec-habitat/blob/master/docs/resources/habitat_service.md)
-
 Use the `habitat_service` InSpec audit resource to test properties of a single Habitat service.
 
-## Availability
+New in version 0.1.0 of the inspec-habitat resource pack.
 
-### Status: EXPERIMENTAL
+## Status: EXPERIMENTAL
 
-This resource, like all of the inspec-habitat resource pack, is in the early stages of research and development. Functionality may be defective, incomplete, or be withdrawn in the future. If you are interested in helping this project mature, please join the conversation or contribute code at the [inspec-habitat project](https://github.com/inspec/inspec-habitat).
+{{% inspec_habitat_experimental %}}
 
-### Connecting to Habitat
+## Installation
 
-To configure `inspec` to be able to communicate with Chef Habitat, be sure [to follow the instructions](https://github.com/inspec/inspec-habitat#configuring-inspec-to-reach-habitat) regarding configuring the connection options. This will prevent 'unsupported platform' errors.
+{{% inspec_habitat_installation %}}
 
-## Examples
+## Connecting to Chef Habitat
 
-### Check for core/httpd service
+{{% inspec_connecting_to_habitat %}}
 
-```ruby
-describe habitat_service(origin: 'core', name: 'httpd') do
-  it                     { should exist }
-  its('version')         { should eq '2.4.35'}
-  its('topology')        { should eq 'standalone' }
-  its('update_strategy') { should eq 'none' }
-end
-```
+### API Versus CLI Access
 
-## Limitations
-
-### API versus CLI access
-
-Habitat exposes certain data via the CLI, and other data via the HTTP Gateway API. To enjoy the full functionality of this resource, use a set of credentials that includes the API. Limited data is available by CLI. See the [train-habitat](https://github.com/inspec/train-habitat) documentation for more details.
+Chef Habitat exposes certain data via the CLI, and other data via the HTTP Gateway API. To enjoy the full functionality of this resource, use a set of credentials that includes the API. Limited data is available by CLI. See the [train-habitat](https://github.com/inspec/train-habitat) documentation for more details.
 
 If you use the CLI interface without the API, unavailable properties will behave as if the resource was not found (see below).
 
@@ -55,17 +43,7 @@ If the service is not found, then this resource behaves as follows:
 - All array and hash-valued properties will return empty objects.
 - All matchers will return false.
 
-## Availability
-
-### Installation
-
-This resource is in the `inspec-habitat` resource pack. You can use the resource by setting an InSpec profile dependency on the resource pack. See [inspec-habitat instructions](https://github.com/inspec/inspec-habitat#installation)
-
-### Version
-
-This resource was first available in version 0.1.0 of the resource pack.
-
-## Resource Parameters
+## Parameters
 
 Use [resource parameters](/inspec/glossary/#resource-parameter) to identify the particular service you wish to test.
 
@@ -177,11 +155,24 @@ describe habitat_service(origin: 'core', name: 'httpd') do
 end
 ```
 
+## Examples
+
+**Check for core/httpd service.**
+
+```ruby
+describe habitat_service(origin: 'core', name: 'httpd') do
+  it                     { should exist }
+  its('version')         { should eq '2.4.35'}
+  its('topology')        { should eq 'standalone' }
+  its('update_strategy') { should eq 'none' }
+end
+```
+
 ## Matchers
 
-Use [matchers](/inspec/glossary/#matcher) to create tests that test a true or false question.
+{{% inspec_matchers_link %}}
 
-InSpec includes a number of [universal matchers](/inspec/matchers/). See below for matchers specific to this resource.
+See below for matchers specific to this resource.
 
 ### have_standalone_topology
 
