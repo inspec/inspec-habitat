@@ -1,0 +1,6 @@
+*.*~
+*~
+
+chef-web-docs/
+.hugo_build.lock
+public/

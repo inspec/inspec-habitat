@@ -2,45 +2,34 @@
 title = "habitat_package resource"
 draft = false
 platform = "habitat"
+gh_repo="inspec-habitat"
 
 [menu]
   [menu.inspec]
     title = "habitat_package"
-    identifier = "inspec/resources/habitat/habitat_package.md habitat_package resource"
+    identifier = "inspec/resources/habitat/habitat_package resource"
     parent = "inspec/resources/habitat"
 +++
 
-[\[edit on GitHub\]](https://github.com/inspec/inspec-habitat/blob/master/docs/resources/habitat_package.md)
-
 Use the `habitat_package` InSpec audit resource to test properties of a single Habitat package.
 
-## Availability
+New in version 0.1.0 of the inspec-habitat resource pack.
 
-### Status: EXPERIMENTAL
+## Status: EXPERIMENTAL
 
-This resource, like all of the inspec-habitat resource pack, is in the early stages of research and development. Functionality may be defective, incomplete, or be withdrawn in the future. If you are interested in helping this project mature, please join the conversation or contribute code at the [inspec-habitat project](https://github.com/inspec/inspec-habitat).
+{{% inspec_habitat_experimental %}}
 
-### Connecting to Habitat
+## Installation
 
-To configure `inspec` to be able to communicate with Chef Habitat, be sure [to follow the instructions](https://github.com/inspec/inspec-habitat#configuring-inspec-to-reach-habitat) regarding configuring the connection options. This will prevent 'unsupported platform' errors.
+{{% inspec_habitat_installation %}}
 
-## Examples
+## Connecting to Chef Habitat
 
-### Check for core/httpd package
+{{% inspec_connecting_to_habitat %}}
 
-```ruby
-describe habitat_package(origin: 'core', name: 'httpd') do
-  it             { should exist }
-  its('version') { should eq '2.4.35'}
-  its('release') { should eq '20190307151146'}
-end
-```
+### API Versus CLI Access
 
-## Limitations
-
-### API versus CLI access
-
-Habitat exposes certain data via the CLI, and other data via the HTTP Gateway API.
+Chef Habitat exposes certain data via the CLI, and other data via the HTTP Gateway API.
 
 This resource is **only** available using CLI credentials.
 
@@ -65,17 +54,7 @@ To avoid this possibility, fully specify the resource parameters, including `ver
 
 To list all installed versions and releases of a named package, use the plural resource `habitat_packages`.
 
-## Availability
-
-### Installation
-
-This resource is in the `inspec-habitat` resource pack. You can use the resource by setting an InSpec profile dependency on this resource pack. See [inspec-habitat instructions](https://github.com/inspec/inspec-habitat#installation)
-
-### Version
-
-This resource was first available in version 0.1.0 of the resource pack.
-
-## Resource Parameters
+## Parameters
 
 Use [resource parameters](/inspec/glossary/#resource-parameter) to identify the particular package you wish to test.
 
@@ -205,10 +184,20 @@ describe habitat_package(origin: 'core', name: 'httpd') do
 end
 ```
 
+## Examples
+
+**Check for core/httpd package.**
+
+```ruby
+describe habitat_package(origin: 'core', name: 'httpd') do
+  it             { should exist }
+  its('version') { should eq '2.4.35'}
+  its('release') { should eq '20190307151146'}
+end
+```
+
 ## Matchers
 
-Use [matchers](/inspec/glossary/#matcher) to create tests that test a true or false question.
-
-InSpec includes a number of [universal matchers](/inspec/matchers/). See below for matchers specific to this resource.
+{{% inspec_matchers_link %}}
 
 This resource does not provide any resource-specific matchers.

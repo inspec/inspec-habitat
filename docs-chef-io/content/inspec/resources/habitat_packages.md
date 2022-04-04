@@ -2,80 +2,40 @@
 title = "habitat_packages resource"
 draft = false
 platform = "habitat"
+gh_repo="inspec-habitat"
 
 [menu]
   [menu.inspec]
     title = "habitat_packages"
-    identifier = "inspec/resources/habitat/habitat_packages.md habitat_packages resource"
+    identifier = "inspec/resources/habitat/habitat_packages resource"
     parent = "inspec/resources/habitat"
 +++
-
-[\[edit on GitHub\]](https://github.com/inspec/inspec-habitat/blob/master/docs/resources/habitat_packages.md)
 
 Use the `habitat_package` (singular) InSpec audit resource to perform in-depth auditing of a single package.
 
 Use the `habitat_packages` (plural) InSpec audit resource to list Habitat packages, and perform bulk operations.
 
-## Availability
+New in version 0.1.0 of the inspec-habitat resource pack.
 
-### Status: EXPERIMENTAL
+## Status: EXPERIMENTAL
 
-This resource, like all of the inspec-habitat resource pack, is in the early stages of research and development. Functionality may be defective, incomplete, or be withdrawn in the future. If you are interested in helping this project mature, please join the conversation or contribute code at the [inspec-habitat project](https://github.com/inspec/inspec-habitat).
+{{% inspec_habitat_experimental %}}
 
-### Connecting to Habitat
+## Installation
 
-To configure `inspec` to be able to communicate with Chef Habitat, be sure [to follow the instructions](https://github.com/inspec/inspec-habitat#configuring-inspec-to-reach-habitat) regarding configuring the connection options. This will prevent 'unsupported platform' errors.
+{{% inspec_habitat_installation %}}
 
-## Examples
+## Connecting to Chef Habitat
 
-### Ensure httpd and memcached are installed
+{{% inspec_connecting_to_habitat %}}
 
-```ruby
-describe habitat_packages do
-  its('names') { should include 'httpd' }
-  its('names') { should include 'memcached' }
-end
-```
+### API Versus CLI Access
 
-### Ensure all packages were updated since January 1, 2018
-
-```ruby
-describe habitat_packages.where { release <= '20180101000000' } do
-  it { should_not exist }
-end
-```
-
-### Search for packages, then examine them in detail using `habitat_package`
-
-```ruby
-# Use the plural resource as a data lookup (not as a test)...
-habitat_packages.where { origin != 'core' }.habitat_package_params.each do |params|
-  # ... then use the singular resource to do in-depth testing
-  describe habitat_package(params) do
-    # ...
-  end
-end
-```
-
-## Limitations
-
-### API versus CLI access
-
-Habitat exposes certain data via the CLI, and other data via the HTTP Gateway API. This resource is not available via the API; you must provide CLI credentials to use the resource. See the [train-habitat](https://github.com/inspec/train-habitat) documentation for more details.
+Chef Habitat exposes certain data via the CLI, and other data via the HTTP Gateway API. This resource is not available via the API; you must provide CLI credentials to use the resource. See the [train-habitat](https://github.com/inspec/train-habitat) documentation for more details.
 
 If you use this resource without the CLI, this resource will always return zero matches.
 
-## Availability
-
-### Installation
-
-This resource is in the `inspec-habitat` resource pack. You can use this resource by setting an InSpec profile dependency on the resource pack. See [inspec-habitat instructions](https://github.com/inspec/inspec-habitat#installation).
-
-### Version
-
-This resource was first available in version 0.1.0 of the resource pack.
-
-## Resource Parameters
+## Parameters
 
 [Resource parameters](/inspec/glossary/#resource-parameter) are arguments passed to the resource in the control code.
 
@@ -196,10 +156,39 @@ describe habitat_packages do
 end
 ```
 
+## Examples
+
+**Ensure httpd and memcached are installed.**
+
+```ruby
+describe habitat_packages do
+  its('names') { should include 'httpd' }
+  its('names') { should include 'memcached' }
+end
+```
+
+**Ensure all packages have been updated since January 1, 2018.**
+
+```ruby
+describe habitat_packages.where { release <= '20180101000000' } do
+  it { should_not exist }
+end
+```
+
+**Search for packages, then examine them in detail using `habitat_package`.**
+
+```ruby
+# Use the plural resource as a data lookup (not as a test)...
+habitat_packages.where { origin != 'core' }.habitat_package_params.each do |params|
+  # ... then use the singular resource to do in-depth testing
+  describe habitat_package(params) do
+    # ...
+  end
+end
+```
+
 ## Matchers
 
-Use [matchers](/inspec/glossary/#matcher) to create tests that test a true or false question.
-
-InSpec includes a number of [universal matchers](/inspec/matchers/).
+{{% inspec_matchers_link %}}
 
 This resource does not define any resource-specific matchers.

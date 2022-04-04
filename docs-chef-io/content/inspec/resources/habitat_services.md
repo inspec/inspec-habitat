@@ -2,95 +2,40 @@
 title = "habitat_services resource"
 draft = false
 platform = "habitat"
+gh_repo="inspec-habitat"
 
 [menu]
   [menu.inspec]
     title = "habitat_services"
-    identifier = "inspec/resources/habitat/habitat_services.md habitat_services resource"
+    identifier = "inspec/resources/habitat/habitat_services resource"
     parent = "inspec/resources/habitat"
 +++
-
-[\[edit on GitHub\]](https://github.com/inspec/inspec-habitat/blob/master/docs/resources/habitat_services.md)
 
 Use the `habitat_service` (singular) InSpec audit resource to perform in-depth auditing of a single service.
 
 Use the `habitat_services` (plural) InSpec audit resource to list Habitat services, and perform bulk operations.
 
-## Availability
+New in version 0.1.0 of the inspec-habitat resource pack.
 
-### Status: EXPERIMENTAL
+## Status: EXPERIMENTAL
 
-This resource, like all of the inspec-habitat resource pack, is in the early stages of research and development. Functionality may be defective, incomplete, or be withdrawn in the future. If you are interested in helping this project mature, please join the conversation or contribute code at the [inspec-habitat project](https://github.com/inspec/inspec-habitat).
+{{% inspec_habitat_experimental %}}
 
-### Connecting to Habitat
+## Installation
 
-To configure `inspec` to be able to communicate with Chef Habitat, be sure [to follow the instructions](https://github.com/inspec/inspec-habitat#configuring-inspec-to-reach-habitat) regarding configuring the connection options. This will prevent 'unsupported platform' errors.
+{{% inspec_habitat_installation %}}
 
-## Examples
+## Connecting to Chef Habitat
 
-### Ensure there are 2 services, with the expected names
+{{% inspec_connecting_to_habitat %}}
 
-```ruby
-describe habitat_services do
-  its('count') { should cmp 2 }
-  its('names') { should include 'httpd' }
-  its('names') { should include 'memcached' }
-end
-```
+### API Versus CLI Access
 
-### Ensure all running services were updated since January 1, 2018
-
-```ruby
-describe habitat_services.where { release <= '20180101000000' } do
-  it { should_not exist }
-end
-```
-
-### Ensure gcc is not a dependency of any service
-
-```ruby
-# One way - list all services, insist none have a dependency on gcc
-describe habitat_services do
-  its('dependency_names') { should_not include 'core/gcc' }
-end
-
-# Another way - list all services with a dependency on gcc, insist there are none
-describe habitat_services.where { dependency_names.include?('core/gcc') } do
-  it { should_not exist }
-end
-```
-
-### Search for services, then examine them in detail using `habitat_service`
-
-```ruby
-# Use the plural resource as a data lookup (not as a test)...
-habitat_services.where { origin != 'core' }.habitat_service_params.each do |params|
-  # ... then use the singular resource to do in-depth testing
-  describe habitat_service(params) do
-    its('release') { should_not be_standalone }
-  end
-end
-```
-
-## Limitations
-
-### API versus CLI access
-
-Habitat exposes certain data via the CLI, and other data via the HTTP Gateway API. To enjoy the full functionality of this resource, use a set of credentials that includes the API. Limited data is available by CLI. See the [train-habitat](https://github.com/inspec/train-habitat) documentation for more details.
+Chef Habitat exposes certain data via the CLI, and other data via the HTTP Gateway API. To enjoy the full functionality of this resource, use a set of credentials that includes the API. Limited data is available by CLI. See the [train-habitat](https://github.com/inspec/train-habitat) documentation for more details.
 
 If you use the CLI interface without the API, unavailable properties will return empty arrays or `nil`, and unavailable filter criteria will never match. See each property and filter criteria for details.
 
-## Availability
-
-### Installation
-
-This resource is in the `inspec-habitat` resource pack. You can use the resource by setting an InSpec profile dependency on the resource pack. See [inspec-habitat instructions](https://github.com/inspec/inspec-habitat#installation).
-
-### Version
-
-This resource was first available in version 0.1.0 of the resource pack.
-
-## Resource Parameters
+## Parameters
 
 [Resource parameters](/inspec/glossary/#resource-parameter) are arguments passed to the resource in the control code.
 
@@ -287,10 +232,54 @@ describe habitat_services do
 end
 ```
 
+## Examples
+
+**Ensure there are two services with the expected names.**
+
+```ruby
+describe habitat_services do
+  its('count') { should cmp 2 }
+  its('names') { should include 'httpd' }
+  its('names') { should include 'memcached' }
+end
+```
+
+**Ensure all running services have been updated since January 1, 2018.**
+
+```ruby
+describe habitat_services.where { release <= '20180101000000' } do
+  it { should_not exist }
+end
+```
+
+**Ensure gcc is not a dependency of any service.**
+
+```ruby
+# One way - list all services, insist none have a dependency on gcc
+describe habitat_services do
+  its('dependency_names') { should_not include 'core/gcc' }
+end
+
+# Another way - list all services with a dependency on gcc, insist there are none
+describe habitat_services.where { dependency_names.include?('core/gcc') } do
+  it { should_not exist }
+end
+```
+
+**Search for services, then examine them in detail using `habitat_service`.**
+
+```ruby
+# Use the plural resource as a data lookup (not as a test)...
+habitat_services.where { origin != 'core' }.habitat_service_params.each do |params|
+  # ... then use the singular resource to do in-depth testing
+  describe habitat_service(params) do
+    its('release') { should_not be_standalone }
+  end
+end
+```
+
 ## Matchers
 
-Use [matchers](/inspec/glossary/#matcher) to create tests that test a true or false question.
-
-InSpec includes a number of [universal matchers](/inspec/matchers/).
+{{% inspec_matchers_link %}}
 
 This resource does not define any resource-specific matchers.
