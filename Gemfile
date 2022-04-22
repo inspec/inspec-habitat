@@ -19,5 +19,5 @@ group :development do
 end
 
 group :inspec do
-  gem "inspec-bin", "~> 4.7"
+  gem "inspec-bin", "~> 5.14"
 end
