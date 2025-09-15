@@ -1,2 +1,4 @@
-[params.inspec-habitat]
-gh_path = "https://github.com/inspec/inspec-habitat/tree/main/docs-chef-io/content/"
+# [params.inspec-habitat]
+# gh_path = "https://github.com/inspec/inspec-habitat/tree/main/docs-chef-io/content/"
+
+# This feature isn't working with this deployment pattern. I'll fix it later.
