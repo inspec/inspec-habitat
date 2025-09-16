@@ -1,7 +1,7 @@
 +++
 title = "habitat_service resource"
 draft = false
-platform = "habitat"
+
 
 [menu.habitat]
     title = "habitat_service"

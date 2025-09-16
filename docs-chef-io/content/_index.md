@@ -1,10 +1,15 @@
 +++
 title = "About Chef InSpec Habitat resources"
-platform = "habitat"
+
 draft = false
-gh_repo = "inspec-habitat"
+
 linkTitle = "Habitat resources"
 summary = "Chef InSpec resources for auditing Habitat packages and services"
+
+[cascade]
+  [cascade.params]
+    platform = "habitat"
+    gh_repo = "inspec-habitat"
 
 [menu.habitat]
     title = "About"
