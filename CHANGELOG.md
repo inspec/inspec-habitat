@@ -1,9 +1,14 @@
-<!-- latest_release 1.0.27 -->
+<!-- latest_release 1.0.28 -->
+## [v1.0.28](https://github.com/inspec/inspec-habitat/tree/v1.0.28) (2025-09-19)
+
+#### Merged Pull Requests
+- Reorganize resource docs [#96](https://github.com/inspec/inspec-habitat/pull/96) ([IanMadd](https://github.com/IanMadd))
+<!-- latest_release -->
+
 ## [v1.0.27](https://github.com/inspec/inspec-habitat/tree/v1.0.27) (2022-02-18)
 
 #### Merged Pull Requests
 - Move content for Hugo chef-web-docs [#79](https://github.com/inspec/inspec-habitat/pull/79) ([IanMadd](https://github.com/IanMadd))
-<!-- latest_release -->
 
 ## [v1.0.26](https://github.com/inspec/inspec-habitat/tree/v1.0.26) (2021-10-28)
 
