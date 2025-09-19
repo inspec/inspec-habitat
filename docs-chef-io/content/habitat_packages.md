@@ -1,16 +1,13 @@
 +++
 title = "habitat_packages resource"
 draft = false
-platform = "habitat"
 
-[menu]
-  [menu.inspec]
+
+[menu.habitat]
     title = "habitat_packages"
     identifier = "inspec/resources/habitat/habitat_packages.md habitat_packages resource"
     parent = "inspec/resources/habitat"
 +++
-
-[\[edit on GitHub\]](https://github.com/inspec/inspec-habitat/blob/master/docs/resources/habitat_packages.md)
 
 Use the `habitat_package` (singular) InSpec audit resource to perform in-depth auditing of a single package.
 
@@ -22,9 +19,17 @@ Use the `habitat_packages` (plural) InSpec audit resource to list Habitat packag
 
 This resource, like all of the inspec-habitat resource pack, is in the early stages of research and development. Functionality may be defective, incomplete, or be withdrawn in the future. If you are interested in helping this project mature, please join the conversation or contribute code at the [inspec-habitat project](https://github.com/inspec/inspec-habitat).
 
-### Connecting to Habitat
+### Connect to Habitat
 
 To configure `inspec` to be able to communicate with Chef Habitat, be sure [to follow the instructions](https://github.com/inspec/inspec-habitat#configuring-inspec-to-reach-habitat) regarding configuring the connection options. This will prevent 'unsupported platform' errors.
+
+### Installation
+
+This resource is in the `inspec-habitat` resource pack. You can use this resource by setting an InSpec profile dependency on the resource pack. See [inspec-habitat instructions](https://github.com/inspec/inspec-habitat#installation).
+
+### Version
+
+This resource was first available in version 0.1.0 of the resource pack.
 
 ## Examples
 
@@ -65,25 +70,15 @@ Habitat exposes certain data via the CLI, and other data via the HTTP Gateway AP
 
 If you use this resource without the CLI, this resource will always return zero matches.
 
-## Availability
+## Resource parameters
 
-### Installation
-
-This resource is in the `inspec-habitat` resource pack. You can use this resource by setting an InSpec profile dependency on the resource pack. See [inspec-habitat instructions](https://github.com/inspec/inspec-habitat#installation).
-
-### Version
-
-This resource was first available in version 0.1.0 of the resource pack.
-
-## Resource Parameters
-
-[Resource parameters](/inspec/glossary/#resource-parameter) are arguments passed to the resource in the control code.
+[Resource parameters](https://docs.chef.io/inspec/glossary/#resource-parameter) are arguments passed to the resource in the control code.
 
 This resource does not accept resource parameters, which is typical for plural resources.
 
-## Filter Criteria
+## Filter criteria
 
-[Filter criteria](/inspec/glossary/#filter-criteria) are used to select which packages you wish to examine. If no filter criteria are used, all packages are selected.
+[Filter criteria](https://docs.chef.io/inspec/glossary/#filter-criteria) are used to select which packages you wish to examine. If no filter criteria are used, all packages are selected.
 
 ### name
 
@@ -131,7 +126,7 @@ end
 
 ## Properties
 
-Use [properties](/inspec/glossary/#property) to create tests that compare an expected value to the actual value.
+Use [properties](https://docs.chef.io/inspec/glossary/#property) to create tests that compare an expected value to the actual value.
 
 ### count
 
@@ -198,8 +193,8 @@ end
 
 ## Matchers
 
-Use [matchers](/inspec/glossary/#matcher) to create tests that test a true or false question.
+Use [matchers](https://docs.chef.io/inspec/glossary/#matcher) to create tests that test a true or false question.
 
-InSpec includes a number of [universal matchers](/inspec/matchers/).
+InSpec includes a number of [universal matchers](https://docs.chef.io/inspec/matchers/).
 
 This resource does not define any resource-specific matchers.

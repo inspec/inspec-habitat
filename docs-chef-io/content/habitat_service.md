@@ -1,16 +1,13 @@
 +++
 title = "habitat_service resource"
 draft = false
-platform = "habitat"
 
-[menu]
-  [menu.inspec]
+
+[menu.habitat]
     title = "habitat_service"
     identifier = "inspec/resources/habitat/habitat_service.md habitat_service resource"
     parent = "inspec/resources/habitat"
 +++
-
-[\[edit on GitHub\]](https://github.com/inspec/inspec-habitat/blob/master/docs/resources/habitat_service.md)
 
 Use the `habitat_service` InSpec audit resource to test properties of a single Habitat service.
 
@@ -20,9 +17,17 @@ Use the `habitat_service` InSpec audit resource to test properties of a single H
 
 This resource, like all of the inspec-habitat resource pack, is in the early stages of research and development. Functionality may be defective, incomplete, or be withdrawn in the future. If you are interested in helping this project mature, please join the conversation or contribute code at the [inspec-habitat project](https://github.com/inspec/inspec-habitat).
 
-### Connecting to Habitat
+### Connect to Habitat
 
 To configure `inspec` to be able to communicate with Chef Habitat, be sure [to follow the instructions](https://github.com/inspec/inspec-habitat#configuring-inspec-to-reach-habitat) regarding configuring the connection options. This will prevent 'unsupported platform' errors.
+
+### Installation
+
+This resource is in the `inspec-habitat` resource pack. You can use the resource by setting an InSpec profile dependency on the resource pack. See [inspec-habitat instructions](https://github.com/inspec/inspec-habitat#installation)
+
+### Version
+
+This resource was first available in version 0.1.0 of the resource pack.
 
 ## Examples
 
@@ -55,19 +60,9 @@ If the service is not found, then this resource behaves as follows:
 - All array and hash-valued properties will return empty objects.
 - All matchers will return false.
 
-## Availability
+## Resource parameters
 
-### Installation
-
-This resource is in the `inspec-habitat` resource pack. You can use the resource by setting an InSpec profile dependency on the resource pack. See [inspec-habitat instructions](https://github.com/inspec/inspec-habitat#installation)
-
-### Version
-
-This resource was first available in version 0.1.0 of the resource pack.
-
-## Resource Parameters
-
-Use [resource parameters](/inspec/glossary/#resource-parameter) to identify the particular service you wish to test.
+Use [resource parameters](https://docs.chef.io/inspec/glossary/#resource-parameter) to identify the particular service you wish to test.
 
 ### origin
 
@@ -99,7 +94,7 @@ end
 
 ## Properties
 
-Use [properties](/inspec/glossary/#property) to create tests that compare an expected value to the actual value.
+Use [properties](https://docs.chef.io/inspec/glossary/#property) to create tests that compare an expected value to the actual value.
 
 ### dependency_names
 
@@ -179,9 +174,9 @@ end
 
 ## Matchers
 
-Use [matchers](/inspec/glossary/#matcher) to create tests that test a true or false question.
+Use [matchers](https://docs.chef.io/inspec/glossary/#matcher) to create tests that test a true or false question.
 
-InSpec includes a number of [universal matchers](/inspec/matchers/). See below for matchers specific to this resource.
+InSpec includes a number of [universal matchers](https://docs.chef.io/inspec/matchers/). See below for matchers specific to this resource.
 
 ### have_standalone_topology
 
