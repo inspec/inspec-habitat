@@ -189,3 +189,7 @@ provided in a Vagrant VM. The sample application will be available on the host a
 
 Tests are located in `test/integration/` and may be run using
 `rake test:integration`.
+
+# Copyright
+
+See [COPYRIGHT.md](./COPYRIGHT.md).
